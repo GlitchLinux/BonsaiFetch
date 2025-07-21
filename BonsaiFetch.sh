@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Bonsai Linux Fetch Tool Installer - New Cyberpunk UI
-# Creates modern cyberpunk-style fetch tool with dynamic boot detection
+# Bonsai Linux Cyberpunk Fetch Tool Installer - Advanced Boot Detection
+# Creates modern cyberpunk-style fetch tool with robust boot detection
 # MOTD disabled by default - use 'bonsaifetch' command
 # Author: GlitchLinux
 
@@ -24,9 +24,9 @@ BACKUP_DIR="/etc/motd-backup-$(date +%Y%m%d-%H%M%S)"
 print_banner() {
     echo -e "${CYAN}"
     echo "╔══════════════════════════════════════════════════════════╗"
-    echo "║      Bonsai Linux Cyberpunk Fetch Tool Installer       ║"
+    echo "║    Bonsai Linux Cyberpunk Fetch Tool Installer v2.0     ║"
     echo "║                    by GlitchLinux                        ║"
-    echo "║        New Cyberpunk UI + Dynamic Boot Detection        ║"
+    echo "║      Advanced Boot Detection + Fixed UI Formatting      ║"
     echo "╚══════════════════════════════════════════════════════════╝"
     echo -e "${NC}"
 }
@@ -102,13 +102,13 @@ clean_existing_motd() {
     mkdir -p "$MOTD_DIR"
 }
 
-# Create the standalone bonsaifetch command with new cyberpunk UI
+# Create the standalone bonsaifetch command with advanced boot detection
 create_bonsaifetch() {
-    print_step "Creating standalone bonsaifetch command with cyberpunk UI..."
+    print_step "Creating standalone bonsaifetch command with advanced boot detection..."
     
     cat > "/usr/local/bin/bonsaifetch" << 'EOF'
 #!/bin/bash
-# Bonsai Linux Fetch Tool - Cyberpunk UI with Dynamic Boot Detection
+# Bonsai Linux Fetch Tool - Advanced Boot Detection with Fixed UI
 # Works independently of MOTD configuration
 
 # Shared color setup function - handles tput errors gracefully
@@ -151,31 +151,140 @@ setup_ansi_colors() {
 # Initialize colors
 setup_colors
 
-# Function to detect boot type dynamically
+# Advanced boot detection function with multiple failsafe methods
 detect_boot_type() {
-    local boot_status
+    local live_score=0
+    local install_score=0
+    local detection_methods=()
     
-    # Check for live boot from squashfs
-    if [[ -f /run/live/medium/live/filesystem.squashfs ]]; then
-        # Check if booted to RAM (no source media)
-        if ! findmnt /run/live/medium >/dev/null 2>&1; then
-            boot_status="${c6} ¤ RAM BOOT ${bold}${c2}"
-        # Check for LUKS encrypted live system
-        elif [[ -d /dev/mapper ]] && ls /dev/mapper/luks-* >/dev/null 2>&1 && findmnt /union >/dev/null 2>&1; then
-            boot_status="${c6} ¤ LIVE LUKS ${bold}${c2}"
-        # Check for ISO/IMG read-only media
-        elif mount | grep -q "ro.*iso9660\|ro.*vfat.*LIVE"; then
-            boot_status="${c6} ¤ ISO BOOT ${bold}${c2}"
-        # Regular live boot
-        else
-            boot_status="${c6} ¤ LIVE BOOT ${bold}${c2}"
+    # Method 1: Kernel command line analysis (most reliable)
+    if grep -qE "boot=live|boot=casper|rd.live.image|live:" /proc/cmdline 2>/dev/null; then
+        ((live_score += 4))
+        detection_methods+=("cmdline")
+        
+        # Specific live system type detection
+        if grep -q "toram" /proc/cmdline 2>/dev/null; then
+            echo "${c6} ¤ RAM BOOT    ${bold}${c2}"
+            return
+        elif grep -q "persistent" /proc/cmdline 2>/dev/null; then
+            echo "${c6} ¤ PERSISTENT  ${bold}${c2}"
+            return
         fi
-    else
-        # Normal installed system
-        boot_status="${c6} ¤ FULL SYSTEM   ${bold}${c2}"
     fi
     
-    echo "$boot_status"
+    # Method 2: Live system directory structure
+    local live_dirs=("/run/live" "/lib/live/mount" "/rofs" "/casper" "/run/live/medium")
+    for dir in "${live_dirs[@]}"; do
+        if [[ -d "$dir" ]]; then
+            ((live_score += 2))
+            detection_methods+=("live-dirs")
+            break
+        fi
+    done
+    
+    # Method 3: SquashFS detection (primary live indicator)
+    if mount | grep -q squashfs 2>/dev/null; then
+        ((live_score += 3))
+        detection_methods+=("squashfs")
+    fi
+    
+    # Method 4: Root filesystem type analysis
+    local root_fs_type
+    root_fs_type=$(findmnt -n -o FSTYPE / 2>/dev/null || echo "unknown")
+    if [[ "$root_fs_type" =~ ^(overlay|overlayfs|aufs|tmpfs)$ ]]; then
+        ((live_score += 3))
+        detection_methods+=("union-fs")
+    elif [[ "$root_fs_type" =~ ^(ext[234]|xfs|btrfs|f2fs)$ ]]; then
+        ((install_score += 4))
+        detection_methods+=("persistent-fs")
+    fi
+    
+    # Method 5: Check for live media mount points
+    if findmnt /run/live/medium >/dev/null 2>&1; then
+        ((live_score += 2))
+        detection_methods+=("live-medium")
+        
+        # Check if media is read-only ISO
+        if mount | grep -q "/run/live/medium.*ro.*iso9660" 2>/dev/null; then
+            echo "${c6} ¤ ISO BOOT    ${bold}${c2}"
+            return
+        fi
+    fi
+    
+    # Method 6: LUKS encryption detection
+    if [[ -d /dev/mapper ]] && ls /dev/mapper/luks-* >/dev/null 2>&1; then
+        if findmnt /union >/dev/null 2>&1 || [[ $live_score -gt 0 ]]; then
+            echo "${c6} ¤ LIVE LUKS   ${bold}${c2}"
+            return
+        fi
+    fi
+    
+    # Method 7: EFI detection for system type hints
+    local efi_detected=false
+    if [[ -d /sys/firmware/efi ]]; then
+        efi_detected=true
+        # Small EFI partition indicates full installation
+        local esp_size
+        esp_size=$(lsblk -o SIZE,PARTTYPE 2>/dev/null | grep -i efi | head -1 | awk '{print $1}' | sed 's/[^0-9.]//g')
+        if [[ -n "$esp_size" ]] && (( $(echo "$esp_size < 500" | bc -l 2>/dev/null || echo "0") )); then
+            ((install_score += 2))
+            detection_methods+=("small-esp")
+        fi
+    fi
+    
+    # Method 8: tmpfs usage analysis
+    local tmpfs_count
+    tmpfs_count=$(mount | grep tmpfs | wc -l 2>/dev/null || echo "0")
+    if [[ $tmpfs_count -gt 15 ]]; then
+        ((live_score += 1))
+        detection_methods+=("high-tmpfs")
+    fi
+    
+    # Method 9: RAM vs filesystem size analysis
+    local total_ram used_ram root_size
+    total_ram=$(free -m 2>/dev/null | awk '/^Mem:/{print $2}' || echo "0")
+    root_size=$(df -m / 2>/dev/null | awk 'NR==2{print $3}' || echo "0")
+    
+    if [[ $root_size -gt 0 && $total_ram -gt 0 ]]; then
+        local ratio=$((root_size * 100 / total_ram))
+        if [[ $ratio -gt 40 ]]; then
+            ((live_score += 2))
+            detection_methods+=("ram-ratio")
+        fi
+    fi
+    
+    # Method 10: Check for live filesystem files
+    local live_files=("/run/live/medium/live/filesystem.squashfs" "/casper/filesystem.squashfs" "/LiveOS/squashfs.img")
+    for file in "${live_files[@]}"; do
+        if [[ -f "$file" ]]; then
+            ((live_score += 3))
+            detection_methods+=("live-files")
+            break
+        fi
+    done
+    
+    # Final determination with confidence scoring
+    if [[ $live_score -ge 6 ]]; then
+        # High confidence live system - check for RAM boot
+        if ! findmnt /run/live/medium >/dev/null 2>&1 && [[ $live_score -ge 8 ]]; then
+            echo "${c6} ¤ RAM BOOT    ${bold}${c2}"
+        else
+            echo "${c6} ¤ LIVE SYSTEM ${bold}${c2}"
+        fi
+    elif [[ $live_score -ge 3 ]]; then
+        # Medium confidence live system
+        echo "${c6} ¤ LIVE BOOT   ${bold}${c2}"
+    elif [[ $install_score -ge 4 ]]; then
+        # High confidence installed system
+        echo "${c6} ¤ FULL SYSTEM ${bold}${c2}"
+    else
+        # Fallback detection
+        if [[ -f /etc/fstab ]] && grep -q "UUID=" /etc/fstab 2>/dev/null; then
+            echo "${c6} ¤ FULL SYSTEM ${bold}${c2}"
+        else
+            echo "${c6} ¤ LIVE SYSTEM ${bold}${c2}"
+        fi
+    fi
 }
 
 # Function to get system information
@@ -231,11 +340,11 @@ main() {
     # Get system information
     get_system_info
     
-    # Get dynamic boot status
+    # Get dynamic boot status with advanced detection
     local boot_status
     boot_status=$(detect_boot_type)
     
-    # Create cyberpunk UI display (DO NOT MODIFY THE LAYOUT - VERY SENSITIVE)
+    # Fixed cyberpunk UI display - EXACT formatting preserved (16x37 character area)
     cat << DISPLAY
 
 ${c2}${bold}${c2}⊏══════╗${boot_status}
@@ -274,7 +383,7 @@ DISPLAY
 # Parse arguments
 case "$1" in
     "--help"|"-h")
-        echo "Bonsai Linux Fetch Tool - Cyberpunk Edition"
+        echo "Bonsai Linux Fetch Tool - Advanced Detection Edition"
         echo "Usage: bonsaifetch [options]"
         echo ""
         echo "Options:"
@@ -285,12 +394,22 @@ case "$1" in
         echo "  bonsaifetch                # Cyberpunk system info"
         echo "  bonsaifetch --typewriter   # With typewriter effects"
         echo ""
-        echo "Boot Detection:"
-        echo "  • LIVE BOOT     - Standard live system"
+        echo "Advanced Boot Detection:"
+        echo "  • LIVE SYSTEM   - Standard live system"
         echo "  • RAM BOOT      - Live system copied to RAM"
         echo "  • LIVE LUKS     - Encrypted live system"
-        echo "  • ISO LIVE BOOT - Booted from ISO/IMG"
-        echo "  • PERSISTENCE   - Normal installed system"
+        echo "  • ISO BOOT      - Booted from ISO/IMG"
+        echo "  • PERSISTENT    - Live system with persistence"
+        echo "  • FULL SYSTEM   - Normal installed system"
+        echo ""
+        echo "Detection Methods:"
+        echo "  • Kernel command line analysis"
+        echo "  • Filesystem type detection"
+        echo "  • SquashFS and overlay detection"
+        echo "  • Live directory structure analysis"
+        echo "  • EFI system partition analysis"
+        echo "  • Memory usage pattern analysis"
+        echo "  • Multi-method verification with scoring"
         exit 0
         ;;
     *)
@@ -300,7 +419,7 @@ esac
 EOF
     
     chmod +x "/usr/local/bin/bonsaifetch"
-    print_status "Created cyberpunk bonsaifetch command: /usr/local/bin/bonsaifetch"
+    print_status "Created advanced bonsaifetch command: /usr/local/bin/bonsaifetch"
 }
 
 # Create the MOTD header script (DISABLED by default)
@@ -309,7 +428,7 @@ create_sidebyside_header() {
     
     cat > "$MOTD_DIR/01-bonsai-header" << 'EOF'
 #!/bin/bash
-# Bonsai Linux MOTD - Cyberpunk Header
+# Bonsai Linux MOTD - Advanced Cyberpunk Header
 # This script is disabled by default - use 'bonsaifetch' command instead
 
 # Execute the standalone bonsaifetch command
@@ -362,13 +481,13 @@ create_management_tools() {
     
     cat > "/usr/local/bin/bonsai-motd" << 'EOF'
 #!/bin/bash
-# Bonsai Linux MOTD Management Tool
+# Bonsai Linux MOTD Management Tool - Advanced Edition
 
 MOTD_DIR="/etc/update-motd.d"
 
 case "$1" in
     "test")
-        echo "Testing Bonsai Linux Cyberpunk MOTD (same as 'bonsaifetch --typewriter')..."
+        echo "Testing Bonsai Linux Advanced MOTD (same as 'bonsaifetch --typewriter')..."
         echo ""
         if command -v bonsaifetch >/dev/null 2>&1; then
             bonsaifetch --typewriter
@@ -378,8 +497,8 @@ case "$1" in
         ;;
     "enable")
         chmod +x "$MOTD_DIR/01-bonsai-header"
-        echo "Bonsai Cyberpunk MOTD enabled - will show on login"
-        echo "Note: This uses the standalone bonsaifetch command"
+        echo "Bonsai Advanced MOTD enabled - will show on login"
+        echo "Note: This uses the standalone bonsaifetch command with advanced detection"
         ;;
     "disable")
         chmod -x "$MOTD_DIR"/??-bonsai-*
@@ -394,7 +513,7 @@ case "$1" in
         fi
         ;;
     *)
-        echo "Bonsai Linux Cyberpunk MOTD Management Tool"
+        echo "Bonsai Linux Advanced MOTD Management Tool"
         echo "Usage: $0 {command}"
         echo ""
         echo "Commands:"
@@ -407,10 +526,15 @@ case "$1" in
         echo "  bonsaifetch              - Show cyberpunk system info anytime"
         echo "  bonsaifetch --typewriter - Show with typewriter effects"
         echo ""
-        echo "Boot Detection Features:"
-        echo "  • Dynamic boot type detection (LIVE/RAM/LUKS/ISO/PERSISTENCE)"
-        echo "  • Cyberpunk-style UI with box drawing characters"
-        echo "  • Color-coded sections and information display"
+        echo "Advanced Detection Features:"
+        echo "  • Multi-method boot type detection with scoring system"
+        echo "  • Kernel command line analysis for accurate live detection"
+        echo "  • Filesystem type analysis (overlay, squashfs, ext4, etc.)"
+        echo "  • EFI system partition analysis for installation type hints"
+        echo "  • Memory usage pattern analysis for RAM boot detection"
+        echo "  • LUKS encryption detection for encrypted live systems"
+        echo "  • Cross-verification with multiple detection methods"
+        echo "  • Failsafe detection with confidence scoring"
         echo ""
         echo "Note: MOTD is disabled by default. Use 'bonsaifetch' command instead."
         exit 1
@@ -419,17 +543,17 @@ esac
 EOF
 
     chmod +x "/usr/local/bin/bonsai-motd"
-    print_status "Created management tool: bonsai-motd"
+    print_status "Created advanced management tool: bonsai-motd"
 }
 
 # Test the bonsaifetch command
 test_bonsaifetch() {
-    print_step "Testing cyberpunk bonsaifetch command..."
+    print_step "Testing advanced bonsaifetch command..."
     
     echo ""
-    print_info "Cyberpunk Bonsaifetch Preview:"
+    print_info "Advanced Bonsaifetch Preview:"
     echo -e "${CYAN}╔════════════════════════════════════════════════════════════════════════════╗${NC}"
-    echo -e "${CYAN}║                        CYBERPUNK BONSAIFETCH PREVIEW                       ║${NC}"
+    echo -e "${CYAN}║                      ADVANCED BONSAIFETCH PREVIEW                          ║${NC}"
     echo -e "${CYAN}╚════════════════════════════════════════════════════════════════════════════╝${NC}"
     
     # Test bonsaifetch
@@ -451,11 +575,12 @@ main() {
     
     check_root
     
-    print_info "Starting Bonsai Linux Cyberpunk Fetch Tool installation..."
+    print_info "Starting Bonsai Linux Advanced Fetch Tool installation..."
     print_info "This will create:"
-    print_info "  • 'bonsaifetch' - Cyberpunk-style fetch command (primary tool)"
-    print_info "  • Dynamic boot type detection (LIVE/RAM/LUKS/ISO/PERSISTENCE)"
-    print_info "  • Modern UI with box drawing characters and color coding"
+    print_info "  • 'bonsaifetch' - Advanced cyberpunk fetch tool (primary tool)"
+    print_info "  • Multi-method boot detection with 10+ verification methods"
+    print_info "  • Fixed UI formatting (exact 16x37 character layout)"
+    print_info "  • Robust error handling and fallback detection"
     print_info "  • MOTD components (DISABLED by default)"
     print_info "  • Management tools for optional MOTD activation"
     
@@ -479,11 +604,11 @@ main() {
     
     # Final information
     echo ""
-    print_status "Bonsai Linux Cyberpunk Fetch Tool installation completed successfully!"
+    print_status "Bonsai Linux Advanced Fetch Tool installation completed successfully!"
     echo ""
     print_info "🎯 Primary Tool Installed:"
-    echo -e "  ${GREEN}• bonsaifetch${NC}               - Show cyberpunk system info anytime"
-    echo -e "  ${GREEN}• bonsaifetch --typewriter${NC}  - Show with typewriter effects"
+    echo -e "  ${GREEN}• bonsaifetch${NC}               - Advanced cyberpunk system info"
+    echo -e "  ${GREEN}• bonsaifetch --typewriter${NC}  - With typewriter effects"
     echo ""
     print_info "📁 Files Created:"
     echo "  • Fetch Tool: /usr/local/bin/bonsaifetch"
@@ -492,30 +617,48 @@ main() {
     echo "  • Backup: $BACKUP_DIR"
     echo ""
     print_info "🔧 Usage Examples:"
-    echo -e "  ${CYAN}bonsaifetch${NC}                    # Cyberpunk system info"
+    echo -e "  ${CYAN}bonsaifetch${NC}                    # Advanced system info"
     echo -e "  ${CYAN}bonsaifetch --typewriter${NC}       # With animations"
     echo -e "  ${CYAN}sudo bonsai-motd enable${NC}        # Enable MOTD on login"
     echo -e "  ${CYAN}sudo bonsai-motd disable${NC}       # Disable MOTD"
     echo -e "  ${CYAN}echo 'bonsaifetch' >> ~/.bashrc${NC} # Add to bashrc"
     echo ""
-    print_info "🎨 Cyberpunk Features:"
-    echo "  • Dynamic boot detection (LIVE/RAM/LUKS/ISO/PERSISTENCE)"
-    echo "  • Box drawing character UI with cyberpunk aesthetics"
-    echo "  • Color-coded sections (SYSTEM/SESSION/NETWORK)"
-    echo "  • Works independently of MOTD system"
-    echo "  • No tput errors - robust color handling" 
-    echo "  • Optional typewriter effects"
-    echo "  • Can be added to bashrc, zshrc, etc."
+    print_info "🎨 Advanced Features:"
+    echo "  • 10+ detection methods with confidence scoring"
+    echo "  • Kernel command line analysis (most reliable)"
+    echo "  • Filesystem type detection (overlay, squashfs, ext4)"
+    echo "  • Live directory structure analysis"
+    echo "  • EFI system partition analysis"
+    echo "  • Memory usage pattern analysis for RAM boot"
+    echo "  • LUKS encryption detection"
+    echo "  • Multi-method cross-verification"
+    echo "  • Fixed UI formatting (16x37 character layout)"
+    echo "  • Robust error handling and fallbacks"
     echo ""
-    print_info "🚀 Boot Type Detection:"
-    echo "  • LIVE BOOT     - Standard live system from media"
-    echo "  • RAM BOOT      - Live system copied to RAM (no media)"
+    print_info "🚀 Boot Detection Types:"
+    echo "  • LIVE SYSTEM   - Standard live system from media"
+    echo "  • RAM BOOT      - Live system copied to RAM (toram parameter)"
     echo "  • LIVE LUKS     - Encrypted live system with LUKS"
-    echo "  • ISO LIVE BOOT - Booted from read-only ISO/IMG"
-    echo "  • PERSISTENCE   - Normal installed system"
+    echo "  • ISO BOOT      - Booted from read-only ISO/IMG"
+    echo "  • PERSISTENT    - Live system with persistence layer"
+    echo "  • FULL SYSTEM   - Normal installed system (high confidence)"
     echo ""
     print_warning "MOTD is DISABLED by default - use 'bonsaifetch' command instead!"
     print_info "Try it now: bonsaifetch --typewriter"
+    
+    echo ""
+    print_info "🔬 Detection Methods Used:"
+    echo "  1. Kernel command line analysis (boot=live, toram, etc.)"
+    echo "  2. Live system directory structure (/run/live, /casper, etc.)"
+    echo "  3. SquashFS filesystem detection (mount analysis)"
+    echo "  4. Root filesystem type (overlay vs ext4/xfs/btrfs)"
+    echo "  5. Live media mount point verification"
+    echo "  6. LUKS encryption device detection"
+    echo "  7. EFI system partition size analysis"
+    echo "  8. tmpfs usage pattern analysis"
+    echo "  9. RAM vs filesystem size ratio analysis"
+    echo "  10. Live filesystem file detection"
+    echo "  + Fallback methods with confidence scoring"
 }
 
 # Run the main function
