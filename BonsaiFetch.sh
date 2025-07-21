@@ -197,11 +197,11 @@ get_system_info() {
     fi
     
     memory_info=$(free -h 2>/dev/null | awk '/^Mem:/ {print $3 "/" $2}' || echo "Unknown")
-    disk_info=$(df -h / 2>/dev/null | awk 'NR==2 {print $3 "/" $2 " (" $5 " used)"}' || echo "Unknown")
+    disks_space_f=$(df -h / 2>/dev/null | awk 'NR==2 {print $3 "/" $2 " (" $5 " used)"}' || echo "Unknown")
     
     # Get IP addresses
-    private_ip_adress=$(ip route get 1.1.1.1 2>/dev/null | awk '{print $7; exit}' || hostname -I 2>/dev/null | awk '{print $1}' || echo "Unavailable")
-    public_ip=$(timeout 2 curl -s ifconfig.me 2>/dev/null || echo "Unavailable")
+    private_ipv4_adress_lan=$(ip route get 1.1.1.1 2>/dev/null | awk '{print $7; exit}' || hostname -I 2>/dev/null | awk '{print $1}' || echo "Unavailable")
+    public_ipv4_adress_wan=$(timeout 2 curl -s ifconfig.me 2>/dev/null || echo "Unavailable")
     
     # Get CPU info
     cpu_info=$(grep "model name" /proc/cpuinfo 2>/dev/null | head -1 | cut -d: -f2 | sed 's/^ *//' | sed 's/ CPU.*//' || echo "Unknown")
@@ -244,12 +244,12 @@ ${c6}${c5}Linux: ${reset}$os_info${c2} ║${reset}
 ${c6}${c5}Kernel: ${reset}$kernel_info${c2} ╔╝${reset}
 ${c2}${bold}${c2}SESSION ⊏══════════════╝⊏═══════╗${reset}
 ${c2}${c5}CPU:${reset} $cpu_info${c2} ║${reset}
-${c2}${c5}Disks: ${reset}$disk_info${c2}  ╔══╝${reset}
-${c2}${c5}RAM: ${reset}$memory_info${c2}╔════════════╝${reset}
-${c2}${bold}${c2}NETWORK ⊏═══════╝${reset}${c2}⊏══════╗${reset} 
-${c2}${c5}WAN-IPv4: ${reset}$public_ip ${c2}║${reset}
-${c2}${c5}LAN-IPv4: ${reset}$private_ip_adress ${c2}    ║${reset}
-${reset}${c2}⊏═══════════════════════╝${reset}
+${c2}${c5}Disks: ${reset}$disks_space_f${c2}  ╔══╝${reset}
+${c2}${c5}RAM: ${reset}$memory_info${c2} ╔═══════════╝${reset}
+${c2}${bold}${c2}NETWORK ⊏════════╝${reset}${c2}⊏══════╗${reset} 
+${c2}${c5}WAN-IPv4: ${reset}$public_ipv4_adress_wan${c2}  ║${reset}
+${c2}${c5}LAN-IPv4: ${reset}$private_ipv4_adress_lan ${c2}     ║${reset}
+${reset}${c2}⊏════════════════════════╝${reset}
 DISPLAY
  
     # Add typewriter effects if requested
