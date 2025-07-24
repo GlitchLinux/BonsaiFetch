@@ -353,12 +353,13 @@ ${c6}${c5}Linux: ${reset}$os_info${c2} ║${reset}
 ${c6}${c5}Kernel: ${reset}$kernel_info${c2} ╔╝${reset}
 ${c2}${bold}${c2}SESSION ⊏══════════════╝⊏═══════╗${reset}
 ${c2}${c5}CPU:${reset} $cpu_info${c2} ║${reset}
-${c2}${c5}Disks: ${reset}$disks_space_f${c2}  ╔══╝${reset}
-${c2}${c5}RAM: ${reset}$memory_info${c2} ╔═══════════╝${reset}
-${c2}${bold}${c2}NETWORK ⊏════════╝${reset}${c2}⊏══════╗${reset} 
-${c2}${c5}WAN-IPv4: ${reset}$public_ipv4_adress_wan${c2}  ║${reset}
-${c2}${c5}LAN-IPv4: ${reset}$private_ipv4_adress_lan ${c2}     ║${reset}
-${reset}${c2}⊏════════════════════════╝${reset}
+${c2}${c5}Disk: ${reset}$disks_space_f${c2} ╔══════╝${reset}
+${c2}${c5}RAM: ${reset}$memory_info${c2}  ╔═══════╝${reset}
+${c2}${bold}${c2}NETWORK ⊏════════╝${reset}${c2}⊏═╗${reset} 
+${c2}${c5}WAN: ${reset}$public_ipv4_adress_wan${c2}  ║${reset}
+${c2}${c5}LAN: ${reset}$private_ipv4_adress_lan${c2}  ║${reset}
+${reset}${c2}⊏═══════════════════╝${reset}
+${reset}${reset}
 DISPLAY
  
     # Add typewriter effects if requested
