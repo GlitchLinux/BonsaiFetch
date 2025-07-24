@@ -353,8 +353,8 @@ ${c6}${c5}Linux: ${reset}$os_info${c2} ║${reset}
 ${c6}${c5}Kernel: ${reset}$kernel_info${c2} ╔╝${reset}
 ${c2}${bold}${c2}SESSION ⊏══════════════╝⊏═══════╗${reset}
 ${c2}${c5}CPU:${reset} $cpu_info${c2} ║${reset}
-${c2}${c5}Disk: ${reset}$disks_space_f${c2} ╔══════╝${reset}
-${c2}${c5}RAM: ${reset}$memory_info${c2}  ╔═══════╝${reset}
+${c2}${c5}Disk: ${reset}$disks_space_f${c2} ╔════╝${reset}
+${c2}${c5}RAM: ${reset}$memory_info${c2}  ╔═════════╝${reset}
 ${c2}${bold}${c2}NETWORK ⊏════════╝${reset}${c2}⊏═╗${reset} 
 ${c2}${c5}WAN: ${reset}$public_ipv4_adress_wan${c2}  ║${reset}
 ${c2}${c5}LAN: ${reset}$private_ipv4_adress_lan${c2}  ║${reset}
@@ -364,7 +364,7 @@ DISPLAY
  
     # Add typewriter effects if requested
     if [[ "$1" == "--typewriter" ]] || [[ $- == *i* ]]; then
-        typewriter "${c7}-> ${c7}WELCOME${bold}${c7} to Bonsai V4.0"
+        typewriter "${c7}-> ${c7}WELCOME${bold}${c7} to Bonsai Live"
         typewriter "${c7}-> ${c6}apps${bold}${c7} start CLI Toolkit"
         typewriter "${c7}-> ${c6}startx${bold}${c7} JWM GUI Desktop"
         
