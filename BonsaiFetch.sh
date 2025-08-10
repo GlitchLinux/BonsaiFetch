@@ -1,8 +1,7 @@
 #!/bin/bash
 
-# Bonsai Linux Cyberpunk Fetch Tool Installer - Advanced Boot Detection
-# Creates modern cyberpunk-style fetch tool with robust boot detection
-# MOTD disabled by default - use 'bonsaifetch' command
+# Bonsai Linux Cyberpunk Fetch Tool Installer v3.0 - Static Layout File Method
+# Creates fetch tool using exact static layout template
 # Author: GlitchLinux
 
 set -e  # Exit on any error
@@ -19,21 +18,30 @@ NC='\033[0m' # No Color
 # Configuration variables
 MOTD_DIR="/etc/update-motd.d"
 BACKUP_DIR="/etc/motd-backup-$(date +%Y%m%d-%H%M%S)"
+LAYOUT_FILE="/usr/local/bin/bonsaifetch-templete.txt"
+LAYOUT_DIR="/usr/local/bin/"
 
 # Function to print colored output
 print_banner() {
     echo -e "${CYAN}"
-    echo "╔══════════════════════════════════════════════════════════╗"
-    echo "║    Bonsai Linux Cyberpunk Fetch Tool Installer v2.0     ║"
-    echo "║                    by GlitchLinux                        ║"
-    echo "║      Advanced Boot Detection + Fixed UI Formatting      ║"
-    echo "╚══════════════════════════════════════════════════════════╝"
+    echo "╔════════════════════════════════════════════════╗"
+    echo "║    Bonsai Linux Fetch Tool Installer v3.0      ║"
+    echo "╚════════════════════════════════════════════════╝"
     echo -e "${NC}"
 }
 
+#sudo mkdir -p /home/root/
+#mkdir -p /home/$user/ && cd /home/$user/
+#sudo rm -f /home/$user/apps* && sudo rm -f /home/root/apps*
+#wget https://raw.githubusercontent.com/GlitchLinux/gLiTcH-ToolKit/refs/heads/main/apps
+#echo "alias apps='bash /home/$user/apps'" >> /etc/bash.bashrc
+
+echo "alias fetch='bonsaifetch'" >> /etc/bash.bashrc
+echo "alias fetch-edit='sudo nano /usr/local/bin/bonsaifetch-templete.txt'" >> /etc/bash.bashrc
+
 print_status() { echo -e "${GREEN}[✓]${NC} $1"; }
-print_info() { echo -e "${BLUE}[i]${NC} $1"; }
-print_warning() { echo -e "${YELLOW}[!]${NC} $1"; }
+         print_info() { echo -e "${MAGENTA}[i]${NC} $1"; }
+         print_warning() { echo -e "${MAGENTA}[!]${NC} $1"; }
 print_error() { echo -e "${RED}[✗]${NC} $1"; }
 print_step() { echo -e "${MAGENTA}[STEP]${NC} $1"; }
 
@@ -46,70 +54,41 @@ check_root() {
     fi
 }
 
-# Install update-motd package
-install_update_motd() {
-    print_step "Installing update-motd package..."
+# Create the EXACT static layout template file
+create_static_layout_template() {
+    print_step "Creating exact static layout template..."
     
-    local original_dir=$(pwd)
-    cd /tmp
+    # Create directory for bonsai files
+    mkdir -p "$LAYOUT_DIR"
     
-    print_info "Downloading update-motd package..."
-    if wget -q http://archive.ubuntu.com/ubuntu/pool/main/u/update-motd/update-motd_3.10_all.deb; then
-        print_status "Downloaded update-motd package"
-        
-        print_info "Installing update-motd package..."
-        dpkg --force-all -i update-motd_3.10_all.deb || {
-            print_warning "First installation had dependency issues, fixing..."
-        }
-        
-        print_info "Fixing dependencies..."
-        apt-get update -qq && apt-get install -f -y
-        
-        print_info "Final installation attempt..."
-        dpkg --force-all -i update-motd_3.10_all.deb
-        
-        rm -f update-motd_3.10_all.deb
-        print_status "update-motd installation completed"
-    else
-        print_warning "Failed to download, trying apt-get..."
-        apt-get update -qq
-        apt-get install -y update-motd || {
-            print_warning "Could not install update-motd"
-        }
-    fi
+    # Create the EXACT layout template from your document
+    cat > "/usr/local/bin/bonsaifetch-templete.txt" << 'EOF'
+" ${c2}${bold}${reset}${c2}${bold}╭────────❖${reset}"
+" ${c2}${bold}│${reset}${c6}${c5}    ${c6}${c5}${reset}$os_info${c2}${reset}"
+" ${c2}${bold}│${reset}${c6}${c5}    ${reset}$kernel_info${c2} ${reset}"
+" ${c2}${bold}│${reset}${c6}${c5} 󰋊   ${reset}$disks_space_f ${c2}${reset}"
+" ${c2}${bold}│${reset}${c6}${c5}    ${reset}$public_ipv4_adress_wan ${c2}${reset}"
+" ${c2}${bold}│${reset}${c6}${c5} 󰩟   ${reset}$private_ipv4_adress_lan ${c2}${reset}"
+" ${c2}${bold}│${reset}${c6}${c5}    ${reset}$memory_info ${c2}${reset}"
+" ${c2}${bold}│${reset}${c6}${c5}    ${boot_status}"
+" ${c2}${bold}╰────❖${reset}"
+"${reset}${reset}"
+EOF
     
-    cd "$original_dir"
+    print_status "Created exact static layout template: $LAYOUT_FILE"
 }
 
-# Clean existing MOTD scripts
-clean_existing_motd() {
-    print_step "Cleaning existing MOTD scripts..."
-    
-    # Create backup directory
-    mkdir -p "$BACKUP_DIR"
-    
-    # Backup existing MOTD directory
-    if [[ -d "$MOTD_DIR" ]]; then
-        cp -r "$MOTD_DIR" "$BACKUP_DIR/"
-        print_status "Backed up existing MOTD to $BACKUP_DIR"
-        
-        # Remove all existing scripts
-        rm -f "$MOTD_DIR"/*
-        print_status "Removed all existing MOTD scripts"
-    fi
-    
-    # Ensure MOTD directory exists
-    mkdir -p "$MOTD_DIR"
-}
-
-# Create the standalone bonsaifetch command with advanced boot detection
-create_bonsaifetch() {
-    print_step "Creating standalone bonsaifetch command with advanced boot detection..."
+# Create the bonsaifetch command that uses the static template
+create_bonsaifetch_static() {
+    print_step "Creating bonsaifetch with static template method..."
     
     cat > "/usr/local/bin/bonsaifetch" << 'EOF'
 #!/bin/bash
-# Bonsai Linux Fetch Tool - Advanced Boot Detection with Fixed UI
-# Works independently of MOTD configuration
+# Bonsai Linux Fetch Tool - Static Template Method
+# Uses exact layout template for perfect formatting
+
+# Layout template file location
+LAYOUT_TEMPLATE="/usr/local/bin/bonsaifetch-templete.txt"
 
 # Shared color setup function - handles tput errors gracefully
 setup_colors() {
@@ -148,9 +127,6 @@ setup_ansi_colors() {
     reset='\033[0m'
 }
 
-# Initialize colors
-setup_colors
-
 # Advanced boot detection function with multiple failsafe methods
 detect_boot_type() {
     local live_score=0
@@ -164,10 +140,10 @@ detect_boot_type() {
         
         # Specific live system type detection
         if grep -q "toram" /proc/cmdline 2>/dev/null; then
-            echo "${c6} ¤ RAM BOOT    ${bold}${c2}"
+            echo "${c5}${reset}Ram Boot  ${bold}${c2}"
             return
         elif grep -q "persistent" /proc/cmdline 2>/dev/null; then
-            echo "${c6} ¤ PERSISTENT  ${bold}${c2}"
+            echo "${c6}Persistent  ${bold}${c2}"
             return
         fi
     fi
@@ -206,7 +182,7 @@ detect_boot_type() {
         
         # Check if media is read-only ISO
         if mount | grep -q "/run/live/medium.*ro.*iso9660" 2>/dev/null; then
-            echo "${c6} ¤ ISO BOOT    ${bold}${c2}"
+            echo "${reset}Iso Boot    ${bold}${c2}"
             return
         fi
     fi
@@ -214,7 +190,7 @@ detect_boot_type() {
     # Method 6: LUKS encryption detection
     if [[ -d /dev/mapper ]] && ls /dev/mapper/luks-* >/dev/null 2>&1; then
         if findmnt /union >/dev/null 2>&1 || [[ $live_score -gt 0 ]]; then
-            echo "${c6} ¤ LIVE LUKS   ${bold}${c2}"
+            echo "${reset}Persistent Luks   ${bold}${c2}"
             return
         fi
     fi
@@ -226,9 +202,11 @@ detect_boot_type() {
         # Small EFI partition indicates full installation
         local esp_size
         esp_size=$(lsblk -o SIZE,PARTTYPE 2>/dev/null | grep -i efi | head -1 | awk '{print $1}' | sed 's/[^0-9.]//g')
-        if [[ -n "$esp_size" ]] && (( $(echo "$esp_size < 500" | bc -l 2>/dev/null || echo "0") )); then
-            ((install_score += 2))
-            detection_methods+=("small-esp")
+        if [[ -n "$esp_size" ]] && command -v bc >/dev/null 2>&1; then
+            if (( $(echo "$esp_size < 500" | bc -l 2>/dev/null || echo "0") )); then
+                ((install_score += 2))
+                detection_methods+=("small-esp")
+            fi
         fi
     fi
     
@@ -267,33 +245,33 @@ detect_boot_type() {
     if [[ $live_score -ge 6 ]]; then
         # High confidence live system - check for RAM boot
         if ! findmnt /run/live/medium >/dev/null 2>&1 && [[ $live_score -ge 8 ]]; then
-            echo "${c6} ¤ RAM BOOT    ${bold}${c2}"
+            echo "${c5}${reset}Ram Boot    ${bold}${c2}"
         else
-            echo "${c6} ¤ LIVE SYSTEM ${bold}${c2}"
+            echo "${c5}${reset}Live System ${bold}${c2}"
         fi
     elif [[ $live_score -ge 3 ]]; then
         # Medium confidence live system
-        echo "${c6} ¤ LIVE BOOT   ${bold}${c2}"
+        echo "${c5}${reset}Live Boot   ${bold}${c2}"
     elif [[ $install_score -ge 4 ]]; then
         # High confidence installed system
-        echo "${c6} ¤ FULL SYSTEM ${bold}${c2}"
+        echo "${c5}${reset}Persistent ${bold}${c2}"
     else
         # Fallback detection
         if [[ -f /etc/fstab ]] && grep -q "UUID=" /etc/fstab 2>/dev/null; then
-            echo "${c6} ¤ FULL SYSTEM ${bold}${c2}"
+            echo "${c5}${reset}Persistent ${bold}${c2}"
         else
-            echo "${c6} ¤ LIVE SYSTEM ${bold}${c2}"
+            echo "${c5}${reset}Live Boot ${bold}${c2}"
         fi
     fi
 }
 
 # Function to get system information
 get_system_info() {
-    hostname_info=$(hostname 2>/dev/null || echo "Unknown")
-    os_info="Bonsai GNU/Linux"
+    hostname_info=$(cat /proc/sys/kernel/hostname 2>/dev/null || echo "Unknown")
+    os_info=$(cat /etc/os-release | grep -w "PRETTY_NAME" | cut -d '=' -f2 | sed 's/"//g' || echo "Unknown")
     kernel_info=$(uname -r 2>/dev/null || echo "Unknown")
     uptime_info=$(uptime -p 2>/dev/null | sed 's/up //' || echo "Unknown")
-    
+
     # Get host/model info
     if [[ -f /sys/devices/virtual/dmi/id/product_name ]]; then
         host_info=$(cat /sys/devices/virtual/dmi/id/product_name 2>/dev/null || echo "Unknown")
@@ -323,10 +301,30 @@ get_system_info() {
     fi
 }
 
+# Function to display using static template - GUARANTEED PERFECT LAYOUT
+display_static_layout() {
+    # Check if template file exists
+    if [[ ! -f "$LAYOUT_TEMPLATE" ]]; then
+        echo "Error: Layout template not found at $LAYOUT_TEMPLATE"
+        echo "Please reinstall bonsaifetch or create the template file."
+        return 1
+    fi
+    
+    # Get dynamic boot status
+    local boot_status
+    boot_status=$(detect_boot_type)
+    
+    # Read the static template and substitute variables using eval
+    echo ""
+    while IFS= read -r line || [[ -n "$line" ]]; do
+        eval "echo \"$line\""
+    done < "$LAYOUT_TEMPLATE"
+}
+
 # Typewriter effect function
 typewriter() {
     local text="$1"
-    local delay="${2:-0.10}"
+    local delay="${2:-0.02}"
     
     for (( i=0; i<${#text}; i++ )); do
         printf "%b" "${text:$i:1}"
@@ -337,37 +335,21 @@ typewriter() {
 
 # Main fetch function
 main() {
+    # Initialize colors
+    setup_colors
+    
     # Get system information
     get_system_info
     
-    # Get dynamic boot status with advanced detection
-    local boot_status
-    boot_status=$(detect_boot_type)
+    # Display using the static template - PERFECT LAYOUT GUARANTEED
+    display_static_layout
     
-    # Fixed cyberpunk UI display - EXACT formatting preserved (16x37 character area)
-    cat << DISPLAY
-
-${c2}${bold}${c2}⊏══════╗${boot_status}
-${c2}${bold}${c2}SYSTEM ╚════════════════╗${reset}
-${c6}${c5}Linux: ${reset}$os_info${c2} ║${reset}
-${c6}${c5}Kernel: ${reset}$kernel_info${c2} ╔╝${reset}
-${c2}${bold}${c2}SESSION ⊏══════════════╝⊏═══════╗${reset}
-${c2}${c5}CPU:${reset} $cpu_info${c2} ║${reset}
-${c2}${c5}Disk: ${reset}$disks_space_f${c2} ╔════╝${reset}
-${c2}${c5}RAM: ${reset}$memory_info${c2}  ╔═════════╝${reset}
-${c2}${bold}${c2}NETWORK ⊏════════╝${reset}${c2}⊏═╗${reset} 
-${c2}${c5}WAN: ${reset}$public_ipv4_adress_wan${c2}  ║${reset}
-${c2}${c5}LAN: ${reset}$private_ipv4_adress_lan${c2}  ║${reset}
-${reset}${c2}⊏═══════════════════╝${reset}
-${reset}${reset}
-DISPLAY
- 
     # Add typewriter effects if requested
     if [[ "$1" == "--typewriter" ]] || [[ $- == *i* ]]; then
-        typewriter "${c7}-> ${c7}WELCOME${bold}${c7} to Bonsai Live"
-        typewriter "${c7}-> ${c6}apps${bold}${c7} start CLI Toolkit"
-        typewriter "${c7}-> ${c6}startx${bold}${c7} JWM GUI Desktop"
-        
+        typewriter "${c7} ${c7} Welcome${bold}${c7} to Bonsai v3!"
+	    typewriter "${c7} ${c6} startx${bold}${c7} > Xfce Desktop"
+        typewriter "${c7} ${c6} apps${bold}${c7} > Glitch Toolkit"
+
         # Show SSH connection info if applicable
         if [[ -n "$SSH_CLIENT" ]] || [[ -n "$SSH_TTY" ]]; then
             ssh_ip=$(echo "$SSH_CLIENT" | cut -d' ' -f1 2>/dev/null || echo "Unknown")
@@ -384,7 +366,7 @@ DISPLAY
 # Parse arguments
 case "$1" in
     "--help"|"-h")
-        echo "Bonsai Linux Fetch Tool - Advanced Detection Edition"
+        echo "Bonsai Linux Fetch Tool - Static Template Edition"
         echo "Usage: bonsaifetch [options]"
         echo ""
         echo "Options:"
@@ -392,8 +374,10 @@ case "$1" in
         echo "  --help, -h      Show this help message"
         echo ""
         echo "Examples:"
-        echo "  bonsaifetch                # Cyberpunk system info"
+        echo "  bonsaifetch                # Perfect static layout"
         echo "  bonsaifetch --typewriter   # With typewriter effects"
+        echo ""
+        echo "Template File: $LAYOUT_TEMPLATE"
         echo ""
         echo "Advanced Boot Detection:"
         echo "  • LIVE SYSTEM   - Standard live system"
@@ -403,14 +387,12 @@ case "$1" in
         echo "  • PERSISTENT    - Live system with persistence"
         echo "  • FULL SYSTEM   - Normal installed system"
         echo ""
-        echo "Detection Methods:"
-        echo "  • Kernel command line analysis"
-        echo "  • Filesystem type detection"
-        echo "  • SquashFS and overlay detection"
-        echo "  • Live directory structure analysis"
-        echo "  • EFI system partition analysis"
-        echo "  • Memory usage pattern analysis"
-        echo "  • Multi-method verification with scoring"
+        echo "Static Layout Features:"
+        echo "  ✓ Uses exact static template file"
+        echo "  ✓ Perfect ASCII art positioning guaranteed"
+        echo "  ✓ No variable-length formatting issues"
+        echo "  ✓ Consistent layout every time"
+        echo "  ✓ Easy to modify template if needed"
         exit 0
         ;;
     *)
@@ -420,16 +402,101 @@ esac
 EOF
     
     chmod +x "/usr/local/bin/bonsaifetch"
-    print_status "Created advanced bonsaifetch command: /usr/local/bin/bonsaifetch"
+    print_status "Created static template bonsaifetch: /usr/local/bin/bonsaifetch"
 }
 
-# Create the MOTD header script (DISABLED by default)
-create_sidebyside_header() {
-    print_step "Creating MOTD header script (disabled by default)..."
+# Create management tools
+create_management_tools() {
+    print_step "Creating management tools..."
+    
+    cat > "/usr/local/bin/bonsai-motd" << 'EOF'
+#!/bin/bash
+# Bonsai Linux MOTD Management Tool - Static Template Edition
+
+MOTD_DIR="/etc/update-motd.d"
+LAYOUT_TEMPLATE="/usr/local/share/bonsai/layout-template.txt"
+
+case "$1" in
+    "test")
+        echo "Testing Bonsai Linux Static MOTD..."
+        echo ""
+        if command -v bonsaifetch >/dev/null 2>&1; then
+            bonsaifetch --typewriter
+        else
+            echo "bonsaifetch command not found"
+        fi
+        ;;
+    "enable")
+        if [[ -f "$MOTD_DIR/01-bonsai-header" ]]; then
+            chmod +x "$MOTD_DIR/01-bonsai-header"
+            echo "Bonsai Static MOTD enabled - will show on login"
+        else
+            echo "MOTD script not found - please reinstall"
+        fi
+        ;;
+    "disable")
+        chmod -x "$MOTD_DIR"/??-bonsai-* 2>/dev/null
+        echo "Bonsai MOTD disabled - use 'bonsaifetch' command manually"
+        ;;
+    "update")
+        if command -v update-motd >/dev/null 2>&1; then
+            update-motd
+            echo "MOTD cache updated"
+        else
+            echo "update-motd command not available"
+        fi
+        ;;
+    "edit-template")
+        if [[ -f "$LAYOUT_TEMPLATE" ]]; then
+            nano "$LAYOUT_TEMPLATE"
+            echo "Template edited. Changes will take effect immediately."
+        else
+            echo "Template file not found: $LAYOUT_TEMPLATE"
+        fi
+        ;;
+    *)
+        echo "Bonsai Linux Static MOTD Management Tool"
+        echo "Usage: $0 {command}"
+        echo ""
+        echo "Commands:"
+        echo "  test            - Show MOTD preview"
+        echo "  enable          - Enable MOTD on login"
+        echo "  disable         - Disable MOTD on login"
+        echo "  update          - Update MOTD cache"
+        echo "  edit-template   - Edit the static layout template"
+        echo ""
+        echo "Primary Usage:"
+        echo "  bonsaifetch              - Perfect static layout"
+        echo "  bonsaifetch --typewriter - With typewriter effects"
+        echo ""
+        echo "Template File: $LAYOUT_TEMPLATE"
+        echo ""
+        echo "Static Layout Features:"
+        echo "  ✓ Uses exact static template file for perfect positioning"
+        echo "  ✓ No variable-length formatting issues"
+        echo "  ✓ Consistent ASCII art alignment every time"
+        echo "  ✓ Easy template modification with 'edit-template' command"
+        echo ""
+        echo "Note: MOTD is disabled by default. Use 'bonsaifetch' command instead."
+        exit 1
+        ;;
+esac
+EOF
+
+    chmod +x "/usr/local/bin/bonsai-motd"
+    print_status "Created static template management tool: bonsai-motd"
+}
+
+# Create basic MOTD files (disabled by default)
+create_basic_motd() {
+    print_step "Creating basic MOTD files (disabled by default)..."
+    
+    # Ensure MOTD directory exists
+    mkdir -p "$MOTD_DIR"
     
     cat > "$MOTD_DIR/01-bonsai-header" << 'EOF'
 #!/bin/bash
-# Bonsai Linux MOTD - Advanced Cyberpunk Header
+# Bonsai Linux MOTD - Static Template Method
 # This script is disabled by default - use 'bonsaifetch' command instead
 
 # Execute the standalone bonsaifetch command
@@ -441,123 +508,20 @@ fi
 EOF
     
     chmod -x "$MOTD_DIR/01-bonsai-header"  # DISABLED by default
-    print_status "Created disabled header script: 01-bonsai-header (use 'sudo bonsai-motd enable' to activate)"
+    print_status "Created disabled MOTD script (use 'sudo bonsai-motd enable' to activate)"
 }
 
-# Create disabled system info script
-create_disabled_sysinfo() {
-    print_step "Creating disabled system info script..."
-    
-    cat > "$MOTD_DIR/02-bonsai-sysinfo" << 'EOF'
-#!/bin/bash
-# Bonsai Linux MOTD - System Information (Disabled - integrated into bonsaifetch)
-# This script is disabled because system info is now in the standalone bonsaifetch tool
-
-exit 0
-EOF
-    
-    chmod -x "$MOTD_DIR/02-bonsai-sysinfo"  # Make it non-executable
-    print_status "Created disabled system info script: 02-bonsai-sysinfo"
-}
-
-# Create disabled typewriter script
-create_disabled_typewriter() {
-    print_step "Creating disabled typewriter script..."
-    
-    cat > "$MOTD_DIR/03-bonsai-typewriter" << 'EOF'
-#!/bin/bash
-# Bonsai Linux MOTD - Typewriter Effects (Disabled - integrated into bonsaifetch)
-# This script is disabled because typewriter effects are now in the standalone bonsaifetch tool
-
-exit 0
-EOF
-    
-    chmod -x "$MOTD_DIR/03-bonsai-typewriter"  # Make it non-executable
-    print_status "Created disabled typewriter script: 03-bonsai-typewriter"
-}
-
-# Create management tools
-create_management_tools() {
-    print_step "Creating management tools..."
-    
-    cat > "/usr/local/bin/bonsai-motd" << 'EOF'
-#!/bin/bash
-# Bonsai Linux MOTD Management Tool - Advanced Edition
-
-MOTD_DIR="/etc/update-motd.d"
-
-case "$1" in
-    "test")
-        echo "Testing Bonsai Linux Advanced MOTD (same as 'bonsaifetch --typewriter')..."
-        echo ""
-        if command -v bonsaifetch >/dev/null 2>&1; then
-            bonsaifetch --typewriter
-        else
-            echo "bonsaifetch command not found"
-        fi
-        ;;
-    "enable")
-        chmod +x "$MOTD_DIR/01-bonsai-header"
-        echo "Bonsai Advanced MOTD enabled - will show on login"
-        echo "Note: This uses the standalone bonsaifetch command with advanced detection"
-        ;;
-    "disable")
-        chmod -x "$MOTD_DIR"/??-bonsai-*
-        echo "Bonsai MOTD disabled - use 'bonsaifetch' command manually"
-        ;;
-    "update")
-        if command -v update-motd >/dev/null 2>&1; then
-            update-motd
-            echo "MOTD cache updated"
-        else
-            echo "update-motd command not available"
-        fi
-        ;;
-    *)
-        echo "Bonsai Linux Advanced MOTD Management Tool"
-        echo "Usage: $0 {command}"
-        echo ""
-        echo "Commands:"
-        echo "  test     - Show MOTD preview (same as 'bonsaifetch --typewriter')"
-        echo "  enable   - Enable MOTD on login"
-        echo "  disable  - Disable MOTD on login"
-        echo "  update   - Update MOTD cache"
-        echo ""
-        echo "Primary Usage:"
-        echo "  bonsaifetch              - Show cyberpunk system info anytime"
-        echo "  bonsaifetch --typewriter - Show with typewriter effects"
-        echo ""
-        echo "Advanced Detection Features:"
-        echo "  • Multi-method boot type detection with scoring system"
-        echo "  • Kernel command line analysis for accurate live detection"
-        echo "  • Filesystem type analysis (overlay, squashfs, ext4, etc.)"
-        echo "  • EFI system partition analysis for installation type hints"
-        echo "  • Memory usage pattern analysis for RAM boot detection"
-        echo "  • LUKS encryption detection for encrypted live systems"
-        echo "  • Cross-verification with multiple detection methods"
-        echo "  • Failsafe detection with confidence scoring"
-        echo ""
-        echo "Note: MOTD is disabled by default. Use 'bonsaifetch' command instead."
-        exit 1
-        ;;
-esac
-EOF
-
-    chmod +x "/usr/local/bin/bonsai-motd"
-    print_status "Created advanced management tool: bonsai-motd"
-}
-
-# Test the bonsaifetch command
-test_bonsaifetch() {
-    print_step "Testing advanced bonsaifetch command..."
+# Test the static layout
+test_static_layout() {
+    print_step "Testing static layout template..."
     
     echo ""
-    print_info "Advanced Bonsaifetch Preview:"
+    print_info "Static Layout Test:"
     echo -e "${CYAN}╔════════════════════════════════════════════════════════════════════════════╗${NC}"
-    echo -e "${CYAN}║                      ADVANCED BONSAIFETCH PREVIEW                          ║${NC}"
+    echo -e "${CYAN}║                         STATIC TEMPLATE TEST                               ║${NC}"
     echo -e "${CYAN}╚════════════════════════════════════════════════════════════════════════════╝${NC}"
     
-    # Test bonsaifetch
+    # Test bonsaifetch with static template
     if command -v bonsaifetch >/dev/null 2>&1; then
         bonsaifetch --typewriter 2>/dev/null || {
             print_warning "bonsaifetch test completed with warnings"
@@ -576,15 +540,6 @@ main() {
     
     check_root
     
-    print_info "Starting Bonsai Linux Advanced Fetch Tool installation..."
-    print_info "This will create:"
-    print_info "  • 'bonsaifetch' - Advanced cyberpunk fetch tool (primary tool)"
-    print_info "  • Multi-method boot detection with 10+ verification methods"
-    print_info "  • Fixed UI formatting (exact 16x37 character layout)"
-    print_info "  • Robust error handling and fallback detection"
-    print_info "  • MOTD components (DISABLED by default)"
-    print_info "  • Management tools for optional MOTD activation"
-    
     # Ask for confirmation
     read -p "Continue with installation? [Y/n]: " -n 1 -r
     echo
@@ -594,73 +549,16 @@ main() {
     fi
     
     # Installation steps
-    install_update_motd
-    clean_existing_motd
-    create_bonsaifetch
-    create_sidebyside_header
-    create_disabled_sysinfo
-    create_disabled_typewriter
+    create_static_layout_template
+    create_bonsaifetch_static
     create_management_tools
-    test_bonsaifetch
-    
-    # Final information
-    echo ""
-    print_status "Bonsai Linux Advanced Fetch Tool installation completed successfully!"
-    echo ""
-    print_info "🎯 Primary Tool Installed:"
-    echo -e "  ${GREEN}• bonsaifetch${NC}               - Advanced cyberpunk system info"
-    echo -e "  ${GREEN}• bonsaifetch --typewriter${NC}  - With typewriter effects"
-    echo ""
-    print_info "📁 Files Created:"
-    echo "  • Fetch Tool: /usr/local/bin/bonsaifetch"
-    echo "  • MOTD Management: /usr/local/bin/bonsai-motd"
-    echo "  • MOTD Scripts: $MOTD_DIR (DISABLED by default)"
-    echo "  • Backup: $BACKUP_DIR"
-    echo ""
-    print_info "🔧 Usage Examples:"
-    echo -e "  ${CYAN}bonsaifetch${NC}                    # Advanced system info"
-    echo -e "  ${CYAN}bonsaifetch --typewriter${NC}       # With animations"
-    echo -e "  ${CYAN}sudo bonsai-motd enable${NC}        # Enable MOTD on login"
-    echo -e "  ${CYAN}sudo bonsai-motd disable${NC}       # Disable MOTD"
-    echo -e "  ${CYAN}echo 'bonsaifetch' >> ~/.bashrc${NC} # Add to bashrc"
-    echo ""
-    print_info "🎨 Advanced Features:"
-    echo "  • 10+ detection methods with confidence scoring"
-    echo "  • Kernel command line analysis (most reliable)"
-    echo "  • Filesystem type detection (overlay, squashfs, ext4)"
-    echo "  • Live directory structure analysis"
-    echo "  • EFI system partition analysis"
-    echo "  • Memory usage pattern analysis for RAM boot"
-    echo "  • LUKS encryption detection"
-    echo "  • Multi-method cross-verification"
-    echo "  • Fixed UI formatting (16x37 character layout)"
-    echo "  • Robust error handling and fallbacks"
-    echo ""
-    print_info "🚀 Boot Detection Types:"
-    echo "  • LIVE SYSTEM   - Standard live system from media"
-    echo "  • RAM BOOT      - Live system copied to RAM (toram parameter)"
-    echo "  • LIVE LUKS     - Encrypted live system with LUKS"
-    echo "  • ISO BOOT      - Booted from read-only ISO/IMG"
-    echo "  • PERSISTENT    - Live system with persistence layer"
-    echo "  • FULL SYSTEM   - Normal installed system (high confidence)"
-    echo ""
-    print_warning "MOTD is DISABLED by default - use 'bonsaifetch' command instead!"
-    print_info "Try it now: bonsaifetch --typewriter"
-    
-    echo ""
-    print_info "🔬 Detection Methods Used:"
-    echo "  1. Kernel command line analysis (boot=live, toram, etc.)"
-    echo "  2. Live system directory structure (/run/live, /casper, etc.)"
-    echo "  3. SquashFS filesystem detection (mount analysis)"
-    echo "  4. Root filesystem type (overlay vs ext4/xfs/btrfs)"
-    echo "  5. Live media mount point verification"
-    echo "  6. LUKS encryption device detection"
-    echo "  7. EFI system partition size analysis"
-    echo "  8. tmpfs usage pattern analysis"
-    echo "  9. RAM vs filesystem size ratio analysis"
-    echo "  10. Live filesystem file detection"
-    echo "  + Fallback methods with confidence scoring"
+    create_basic_motd
+    test_static_layout
+
 }
 
 # Run the main function
 main "$@"
+
+sudo apt install unzip -y 
+cd /tmp && wget https://raw.githubusercontent.com/GlitchLinux/gLiTcH-ToolKit/refs/heads/main/CaskaydiaCove-Icons-Install.sh && sudo bash CaskaydiaCove-Icons-Install.sh && exit
