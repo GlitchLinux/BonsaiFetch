@@ -30,15 +30,6 @@ print_banner() {
     echo -e "${NC}"
 }
 
-#sudo mkdir -p /home/root/
-#mkdir -p /home/$user/ && cd /home/$user/
-#sudo rm -f /home/$user/apps* && sudo rm -f /home/root/apps*
-#wget https://raw.githubusercontent.com/GlitchLinux/gLiTcH-ToolKit/refs/heads/main/apps
-#echo "alias apps='bash /home/$user/apps'" >> /etc/bash.bashrc
-
-echo "alias fetch='bonsaifetch'" >> /etc/bash.bashrc
-echo "alias fetch-edit='sudo nano /usr/local/bin/bonsaifetch-templete.txt'" >> /etc/bash.bashrc
-
 print_status() { echo -e "${GREEN}[✓]${NC} $1"; }
          print_info() { echo -e "${MAGENTA}[i]${NC} $1"; }
          print_warning() { echo -e "${MAGENTA}[!]${NC} $1"; }
@@ -346,8 +337,8 @@ main() {
     
     # Add typewriter effects if requested
     if [[ "$1" == "--typewriter" ]] || [[ $- == *i* ]]; then
-        typewriter "${c7} ${c7} Welcome${bold}${c7} to Bonsai v3!"
-	    typewriter "${c7} ${c6} startx${bold}${c7} > Xfce Desktop"
+        typewriter "${c7} ${c7} Welcome${bold}${c7} to os_info!"
+	    #typewriter "${c7} ${c6} startx${bold}${c7} > Xfce Desktop"
         typewriter "${c7} ${c6} apps${bold}${c7} > Glitch Toolkit"
 
         # Show SSH connection info if applicable
@@ -366,33 +357,6 @@ main() {
 # Parse arguments
 case "$1" in
     "--help"|"-h")
-        echo "Bonsai Linux Fetch Tool - Static Template Edition"
-        echo "Usage: bonsaifetch [options]"
-        echo ""
-        echo "Options:"
-        echo "  --typewriter    Include typewriter effects"
-        echo "  --help, -h      Show this help message"
-        echo ""
-        echo "Examples:"
-        echo "  bonsaifetch                # Perfect static layout"
-        echo "  bonsaifetch --typewriter   # With typewriter effects"
-        echo ""
-        echo "Template File: $LAYOUT_TEMPLATE"
-        echo ""
-        echo "Advanced Boot Detection:"
-        echo "  • LIVE SYSTEM   - Standard live system"
-        echo "  • RAM BOOT      - Live system copied to RAM"
-        echo "  • LIVE LUKS     - Encrypted live system"
-        echo "  • ISO BOOT      - Booted from ISO/IMG"
-        echo "  • PERSISTENT    - Live system with persistence"
-        echo "  • FULL SYSTEM   - Normal installed system"
-        echo ""
-        echo "Static Layout Features:"
-        echo "  ✓ Uses exact static template file"
-        echo "  ✓ Perfect ASCII art positioning guaranteed"
-        echo "  ✓ No variable-length formatting issues"
-        echo "  ✓ Consistent layout every time"
-        echo "  ✓ Easy to modify template if needed"
         exit 0
         ;;
     *)
