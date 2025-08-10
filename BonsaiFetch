@@ -544,6 +544,11 @@ main() {
 # Run the main function
 main "$@"
 
+
+echo ""
+echo "If you are installing bonsaifetch for the first time you will need the CaskaydiaCove-Icon pack"
+read -p
+
 sleep 8
 cd /tmp && wget https://raw.githubusercontent.com/GlitchLinux/gLiTcH-ToolKit/refs/heads/main/CaskaydiaCove-Icons-Install.sh && sudo bash CaskaydiaCove-Icons-Install.sh && exit
 
