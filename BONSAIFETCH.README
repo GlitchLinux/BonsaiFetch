@@ -1,0 +1,36 @@
+#BonsaiFetch v3.0 - https://github.com/GlitchLinux/BonsaiFetch/tree/main
+                             
+# Enable & Disable Typewriter effect
+type-on 
+type-off
+
+#To enable typewriter on/off settings add ->
+"bash /usr/local/bin/bonsaifetch-type"
+to
+"/etc/bash.bashrc"
+
+#Edit UI layout (The Visual Part thats displayed in shell)
+fetch-edit
+
+#Edit Main Script
+fetch-config
+
+# these are the system wide commands for bonsaifetch configured in /etc/bash.bashrc
+alias type-on='echo "bonsaifetch --typewriter" > /usr/local/bin/bonsaifetch-type && echo "Bonsaif>
+alias type-off='echo "bonsaifetch" > /usr/local/bin/bonsaifetch-type && echo "Bonsaifetch Typewri>
+alias fetch-edit='sudo nano /usr/local/share/bonsai/layout-template.txt'
+alias fetch-config='sudo nano /usr/local/bin/bonsaifetch'
+
+
+# Template Layout
+
+" ${c2}${bold}${reset}${c2}${bold}╭────────❖${reset}"
+" ${c2}${bold}│${reset}${c6}${c5}    ${c6}${c5}${reset}$os_info${c2}${reset}"
+" ${c2}${bold}│${reset}${c6}${c5}    ${reset}$kernel_info${c2} ${reset}"
+" ${c2}${bold}│${reset}${c6}${c5} 󰋊   ${reset}$disks_space_f ${c2}${reset}"
+" ${c2}${bold}│${reset}${c6}${c5}    ${reset}$public_ipv4_adress_wan ${c2}${reset}"
+" ${c2}${bold}│${reset}${c6}${c5} 󰩟   ${reset}$private_ipv4_adress_lan ${c2}${reset}"
+" ${c2}${bold}│${reset}${c6}${c5}    ${reset}$memory_info ${c2}${reset}"
+" ${c2}${bold}│${reset}${c6}${c5}    ${boot_status}"
+" ${c2}${bold}╰────❖${reset}"
+"${reset}${reset}"
