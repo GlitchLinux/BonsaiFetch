@@ -18,7 +18,7 @@ NC='\033[0m' # No Color
 # Configuration variables
 MOTD_DIR="/etc/update-motd.d"
 BACKUP_DIR="/etc/motd-backup-$(date +%Y%m%d-%H%M%S)"
-LAYOUT_FILE="/usr/local/bin/bonsaifetch-templete.txt"
+LAYOUT_FILE="/usr/local/bin/bonsaifetch-template.txt"
 LAYOUT_DIR="/usr/local/bin/"
 
 # Function to print colored output
@@ -29,15 +29,6 @@ print_banner() {
     echo "╚════════════════════════════════════════════════╝"
     echo -e "${NC}"
 }
-
-#sudo mkdir -p /home/root/
-#mkdir -p /home/$user/ && cd /home/$user/
-#sudo rm -f /home/$user/apps* && sudo rm -f /home/root/apps*
-#wget https://raw.githubusercontent.com/GlitchLinux/gLiTcH-ToolKit/refs/heads/main/apps
-#echo "alias apps='bash /home/$user/apps'" >> /etc/bash.bashrc
-
-echo "alias fetch='bonsaifetch'" >> /etc/bash.bashrc
-echo "alias fetch-edit='sudo nano /usr/local/bin/bonsaifetch-templete.txt'" >> /etc/bash.bashrc
 
 print_status() { echo -e "${GREEN}[✓]${NC} $1"; }
          print_info() { echo -e "${MAGENTA}[i]${NC} $1"; }
@@ -62,7 +53,7 @@ create_static_layout_template() {
     mkdir -p "$LAYOUT_DIR"
     
     # Create the EXACT layout template from your document
-    cat > "/usr/local/bin/bonsaifetch-templete.txt" << 'EOF'
+    cat > "/usr/local/bin/bonsaifetch-template.txt" << 'EOF'
 " ${c2}${bold}${reset}${c2}${bold}╭────────❖${reset}"
 " ${c2}${bold}│${reset}${c6}${c5}    ${c6}${c5}${reset}$os_info${c2}${reset}"
 " ${c2}${bold}│${reset}${c6}${c5}    ${reset}$kernel_info${c2} ${reset}"
@@ -347,8 +338,8 @@ main() {
     # Add typewriter effects if requested
     if [[ "$1" == "--typewriter" ]] || [[ $- == *i* ]]; then
         typewriter "${c7} ${c7} Welcome${bold}${c7} to Bonsai v3!"
-	    typewriter "${c7} ${c6} startx${bold}${c7} > Xfce Desktop"
-        typewriter "${c7} ${c6} apps${bold}${c7} > Glitch Toolkit"
+	    #typewriter "${c7} ${c6} startx${bold}${c7} > Xfce Desktop"
+        typewriter "${c7} ${c6}run: apps${bold}${c7} > Glitch Toolkit"
 
         # Show SSH connection info if applicable
         if [[ -n "$SSH_CLIENT" ]] || [[ -n "$SSH_TTY" ]]; then
@@ -366,33 +357,18 @@ main() {
 # Parse arguments
 case "$1" in
     "--help"|"-h")
-        echo "Bonsai Linux Fetch Tool - Static Template Edition"
-        echo "Usage: bonsaifetch [options]"
-        echo ""
-        echo "Options:"
-        echo "  --typewriter    Include typewriter effects"
-        echo "  --help, -h      Show this help message"
-        echo ""
-        echo "Examples:"
-        echo "  bonsaifetch                # Perfect static layout"
-        echo "  bonsaifetch --typewriter   # With typewriter effects"
+        echo "Usage:"
+        echo "  bonsaifetch"               
+        echo "  bonsaifetch --typewriter" 
+        echo "  Enable & Disable Typewriter:"
+        echo "  type-on" 
+        echo "  type-off"
+        echo "  Edit fetch layout: (UI displayed in shell)
+		echo "  fetch-edit"
+        echo "  Edit main config file:"
+        echo "  fetch-config"
         echo ""
         echo "Template File: $LAYOUT_TEMPLATE"
-        echo ""
-        echo "Advanced Boot Detection:"
-        echo "  • LIVE SYSTEM   - Standard live system"
-        echo "  • RAM BOOT      - Live system copied to RAM"
-        echo "  • LIVE LUKS     - Encrypted live system"
-        echo "  • ISO BOOT      - Booted from ISO/IMG"
-        echo "  • PERSISTENT    - Live system with persistence"
-        echo "  • FULL SYSTEM   - Normal installed system"
-        echo ""
-        echo "Static Layout Features:"
-        echo "  ✓ Uses exact static template file"
-        echo "  ✓ Perfect ASCII art positioning guaranteed"
-        echo "  ✓ No variable-length formatting issues"
-        echo "  ✓ Consistent layout every time"
-        echo "  ✓ Easy to modify template if needed"
         exit 0
         ;;
     *)
@@ -458,34 +434,6 @@ case "$1" in
 
 esac
 EOF
-
-    chmod +x "/usr/local/bin/bonsai-motd"
-    print_status "Created static template management tool: bonsai-motd"
-}
-
-# Create basic MOTD files (disabled by default)
-create_basic_motd() {
-    print_step "Creating basic MOTD files (disabled by default)..."
-    
-    # Ensure MOTD directory exists
-    mkdir -p "$MOTD_DIR"
-    
-    cat > "$MOTD_DIR/01-bonsai-header" << 'EOF'
-#!/bin/bash
-# Bonsai Linux MOTD - Static Template Method
-# This script is disabled by default - use 'bonsaifetch' command instead
-
-# Execute the standalone bonsaifetch command
-if command -v bonsaifetch >/dev/null 2>&1; then
-    bonsaifetch --typewriter
-else
-    echo "bonsaifetch command not found"
-fi
-EOF
-    
-    chmod -x "$MOTD_DIR/01-bonsai-header"  # DISABLED by default
-    print_status "Created disabled MOTD script (use 'sudo bonsai-motd enable' to activate)"
-}
 
 # Test the static layout
 test_static_layout() {
