@@ -455,31 +455,7 @@ case "$1" in
         fi
         ;;
     *)
-        echo "Bonsai Linux Static MOTD Management Tool"
-        echo "Usage: $0 {command}"
-        echo ""
-        echo "Commands:"
-        echo "  test            - Show MOTD preview"
-        echo "  enable          - Enable MOTD on login"
-        echo "  disable         - Disable MOTD on login"
-        echo "  update          - Update MOTD cache"
-        echo "  edit-template   - Edit the static layout template"
-        echo ""
-        echo "Primary Usage:"
-        echo "  bonsaifetch              - Perfect static layout"
-        echo "  bonsaifetch --typewriter - With typewriter effects"
-        echo ""
-        echo "Template File: $LAYOUT_TEMPLATE"
-        echo ""
-        echo "Static Layout Features:"
-        echo "  ✓ Uses exact static template file for perfect positioning"
-        echo "  ✓ No variable-length formatting issues"
-        echo "  ✓ Consistent ASCII art alignment every time"
-        echo "  ✓ Easy template modification with 'edit-template' command"
-        echo ""
-        echo "Note: MOTD is disabled by default. Use 'bonsaifetch' command instead."
-        exit 1
-        ;;
+
 esac
 EOF
 
