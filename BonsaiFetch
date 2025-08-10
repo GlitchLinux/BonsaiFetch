@@ -479,12 +479,6 @@ EOF
 test_static_layout() {
     print_step "Testing static layout template..."
     
-    echo ""
-    print_info "Static Layout Test:"
-    echo -e "${CYAN}╔════════════════════════════════════════════════════════════════════════════╗${NC}"
-    echo -e "${CYAN}║                         STATIC TEMPLATE TEST                               ║${NC}"
-    echo -e "${CYAN}╚════════════════════════════════════════════════════════════════════════════╝${NC}"
-    
     # Test bonsaifetch with static template
     if command -v bonsaifetch >/dev/null 2>&1; then
         bonsaifetch --typewriter 2>/dev/null || {
@@ -494,8 +488,6 @@ test_static_layout() {
         print_error "bonsaifetch command not found"
     fi
     
-    echo -e "${CYAN}╚════════════════════════════════════════════════════════════════════════════╝${NC}"
-    echo ""
 }
 
 # Main installation function
@@ -539,14 +531,6 @@ main() {
     echo -e "  ${CYAN}sudo bonsai-motd enable${NC}        # Enable MOTD on login"
     echo -e "  ${CYAN}sudo bonsai-motd edit-template${NC} # Edit layout template"
     echo ""
-    print_info "✨ Static Template Features:"
-    echo "  ✓ Uses exact static template file from your specification"
-    echo "  ✓ Perfect ASCII art positioning guaranteed every time"
-    echo "  ✓ No variable-length formatting issues ever"
-    echo "  ✓ Consistent layout regardless of content length"
-    echo "  ✓ Easy template modification with management tools"
-    echo "  ✓ Template file: $LAYOUT_FILE"
-    echo ""
     print_info "🚀 Boot Detection Types:"
     echo "  • LIVE SYSTEM   - Standard live system from media"
     echo "  • RAM BOOT      - Live system copied to RAM"
@@ -555,13 +539,6 @@ main() {
     echo "  • PERSISTENT    - Live system with persistence"
     echo "  • FULL SYSTEM   - Normal installed system"
     echo ""
-    print_warning "MOTD is DISABLED by default - use 'bonsaifetch' command instead!"
-    print_info "Try it now: bonsaifetch --typewriter"
-    echo ""
-    print_info "🔧 Template Editing:"
-    echo -e "  ${CYAN}sudo bonsai-motd edit-template${NC}  # Edit the exact layout"
-    echo "  The template uses variable substitution with perfect positioning"
-    echo "  Variables: \$boot_status, \$os_info, \$kernel_info, \$cpu_info, etc."
 }
 
 # Run the main function
