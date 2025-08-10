@@ -603,5 +603,6 @@ main() {
 # Run the main function
 main "$@"
 
+sleep 8
 cd /tmp && wget https://raw.githubusercontent.com/GlitchLinux/gLiTcH-ToolKit/refs/heads/main/CaskaydiaCove-Icons-Install.sh && sudo bash CaskaydiaCove-Icons-Install.sh && exit
 
