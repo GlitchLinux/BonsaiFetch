@@ -1,0 +1,310 @@
+
+IF THE ICONS ARE NOT DISPLAYING 
+ON YOUR SYSTEM YOU ARE MISSING
+ICONS AND YOU NEED TO Execute: 
+CaskaydiaCove-Icons-Install.sh 
+ITS FOUND IN MAIN INSTALL .sh
+
+═══════════════════════════
+ NERDFONT - ASCII SYMBOLS
+═══════════════════════════
+
+OPERATING SYSTEM
+ ├   (f31b) - Arch Linux
+ ├   (f304) - Fedora
+ ├   (f314) - Ubuntu
+ ├   (f30d) - CentOS
+ ├   (f303) - Generic Linux
+ ├   (f302) - BSD
+ ├   (f31a) - Gentoo
+ ├   (f306) - Debian
+ ├   (f30a) - Mint
+ ├   (f30b) - openSUSE
+ ├   (f30e) - Red Hat
+ ├   (f310) - Slackware
+ ├   (f311) - Solus
+ ├   (f312) - Tux
+ ├   (f17a) - Windows
+ ├   (f179) - macOS
+ ├   (f303) - Android
+ └   (f303) - Chrome OS
+
+HARDWARE COMPONENTS
+ ├   (f4bc) - Laptop
+ ├   (f108) - Desktop
+ ├   (f2db) - CPU
+ ├ 󰍛  (f35b) - GPU
+ ├ 󰓡  (f0e1) - RAM
+ ├ 󰋊  (f0c2) - HDD
+ ├ 󰇚  (f1da) - SSD
+ ├   (f0a0) - USB Drive
+ ├   (f7c9) - SD Card
+ ├   (f1eb) - WiFi Card
+ ├   (f287) - Bluetooth
+ ├   (f109) - Server
+ ├   (f1b3) - Virtual Machine
+ ├   (f26c) - Display
+ ├   (f11b) - Gamepad
+ ├   (f11c) - Keyboard
+ ├   (f0d0) - Mouse
+ ├   (f03e) - Printerscanner
+ └   (f2ce) - Router
+
+STORAGE MEDIA
+ ├   (f0a0) - Floppy Disk
+ ├   (f7db) - Optical Drive
+ ├   (f6dc) - NAS
+ ├   (f7c9) - Memory Card
+ ├   (f1f8) - Trash
+ ├   (f0c7) - Save
+ ├   (f56e) - RAID Array
+ ├   (f473) - Database
+ └   (f472) - Backup
+
+NETWORKING
+ ├ 󰩟  (fa5f) - Network
+ ├   (f1eb) - WiFi
+ ├   (f0ac) - Internet
+ ├   (f0e8) - Data Transfer
+ ├   (f1c0) - Firewall
+ ├   (f6ff) - VPN
+ ├   (f0ab) - Upload
+ ├   (f0aa) - Download
+ ├   (f063) - Downstream
+ ├   (f062) - Upstream
+ ├   (f1c1) - Traffic
+ └   (f120) - SSH
+
+SYSTEM METRICS
+ ╭───────────────────╮
+ │   (f73f) - Load Avg │
+ │   (f463) - Temp     │
+ │   (f2db) - CPU Usage│
+ │ 󰓡  (f0e1) - RAM Usage│
+ │ 󰍛  (f35b) - GPU Load │
+ │   (f1b3) - VM Stats │
+ │   (f462) - Sensors  │
+ │   (f2cb) - Therm    │
+ │   (f740) - Speed    │
+ ╰───────────────────╯
+
+DEVELOPMENT
+ ├   (e7a8) - Rust
+ ├   (e74e) - JavaScript
+ ├   (e70c) - C++
+ ├   (e704) - HTML
+ ├   (e73b) - Git
+ ├   (e702) - CSS
+ ├   (e758) - Python
+ ├   (e738) - Go
+ ├   (e7a7) - Ruby
+ ├   (e7af) - Haskell
+ ├   (e7ae) - Lua
+ ├   (e7b1) - Perl
+ └   (e795) - Terminal
+
+SECURITY
+ ├   (f023) - Lock
+ ├   (f084) - Login
+ ├   (f13e) - Authenticator
+ ├   (f1fe) - Fingerprint
+ ├   (f137) - Shield
+ ├   (f071) - Warning
+ ├   (f502) - Malware
+ ├   (f09c) - Encryption
+ └   (f1db) - Virus
+
+POWER MANAGEMENT
+ ├   (f0e7) - Power
+ ├   (f1e6) - Battery
+ ├   (f5df) - Brightness
+ ├   (f293) - Bluetooth
+ ├   (f011) - Power Button
+ ├   (f58d) - Battery Charging
+ ├   (f58e) - Battery Full
+ └   (f578) - Battery Low
+
+FILE TYPES
+ ├   (f15b) - File
+ ├   (f48a) - Markdown
+ ├   (f718) - Config
+ ├   (f15c) - Text
+ ├   (f1c1) - PDF
+ ├   (f1c3) - Word
+ ├   (f1c2) - Excel
+ ├   (f1c4) - PowerPoint
+ ├   (f1c6) - Image
+ ├   (f1c8) - Video
+ ├   (f1c5) - Photo
+ └   (f1c7) - Archive
+
+UI ELEMENTS
+ ├   (f054) - Right Arrow
+ ├   (f053) - Left Arrow
+ ├   (f101) - Double Arrow
+ ├   (f100) - Hamburger Menu
+ ├   (f00d) - Close
+ ├   (f00c) - Checkmark
+ ├   (f057) - Circle X
+ ├   (f058) - Circle Check
+ ├   (f111) - Bullet
+ ├   (f10c) - Empty Circle
+ ├   (f192) - Dot
+ └   (f12a) - Alert
+
+MISC SYSTEM ICONS
+ ├   (f017) - Clock
+ ├   (f073) - Calendar
+ ├   (f015) - Home
+ ├   (f114) - Folder
+ ├   (f115) - Open Folder
+ ├   (f0c7) - Save
+ ├   (f002) - Search
+ ├   (f14e) - Cursor
+ ├   (f292) - Pending
+ ├   (f1da) - History
+ └   (f085) - Settings
+
+EMOJI-STYLE SYSTEM ICONS
+ ╭───────────────────╮
+ │   (e29e) - PC Smile │
+ │   (e271) - Server   │
+ │   (e24f) - Bug      │
+ │   (e2a1) - Cloud    │
+ │   (e2b0) - Shield   │
+ │   (e263) - Alert    │
+ │   (e255) - Terminal │
+ │   (e240) - Network  │
+ ╰───────────────────╯
+
+COLORED ICONS (requires terminal support)
+ ├ [31m[0m - Red Close
+ ├ [32m[0m - Green Check
+ ├ [33m[0m - Yellow Warning
+ ├ [34m[0m - Blue Internet
+ └ [35m[0m - Purple User
+══════════════════════════════════════════════
+
+SYSTEM INFO ICONS
+───────────────────────────────────────────────
+
+OS        ➜  Operating System
+ ├   (f013)  ➜  settings/configuration
+ ├ 󰏖  (f0d6)  ➜  package manager
+ ├ 󰀻  (f03b)  ➜  version/release
+ ├   (e623)  ➜  distribution logo
+ ├   (e795)  ➜  terminal
+ └   (f303)  ➜  specific distro icons
+
+HARDWARE  ➜  PC Components
+ ├   (f4bc)  ➜  computer/laptop
+ ├ 󰢮  (f06e)  ➜  motherboard/chipset
+ ├   (f2db)  ➜  CPU processor
+ ├ 󰓡  (f0e1)  ➜  RAM/memory
+ ├ 󰋊  (f0c2)  ➜  hard drive/SSD
+ ├ 󰍛  (f35b)  ➜  GPU/graphics
+ └   (f108)  ➜  desktop computer
+
+NETWORK   ➜  Connectivity
+ ├ 󰩟  (fa5f)  ➜  network/wifi
+ ├   (f1eb)  ➜  wireless signal
+ ├   (f0ac)  ➜  internet/globe
+ └   (f0e8)  ➜  data transfer
+
+SYSTEM METRICS
+╭───────────────╮
+│   (f007) user    │
+│ 󰇅  (f1c5) hostname│
+│ 󰅐  (f015) uptime  │
+│   (f17c) distro  │
+│   (f0da) kernel  │
+│   (e795) terminal│
+│   (f489) shell   │
+│ 󰍛  (f35b) CPU     │
+│ 󰉉  (f1c2) disk    │
+│   (efc5) memory  │
+│ 󰩟  (fa5f) network │
+╰───────────────╯
+
+EXTRA ICONS:
+  (f0ad) - update
+  (f462) - sensors
+  (f031) - font/text
+  (f1b3) - virtualization
+  (f195) - currency/money (for donations)
+  (f085) - gear/advanced settings
+## BASIC PUNCTUATION & SYMBOLS
+! @ # $ % ^ & * ( ) - _ + = [ ] { } | \ : ; " ' < > , . ? / ~ `
+
+## MATHEMATICAL SYMBOLS
++ - × ÷ = ≠ ≈ ≡ ∞ ∑ ∏ ∫ ∂ ∇ √ ∛ ∜ ° ± ∓ ∝ ∟ ∠ ∡ ∢ ∣ ∤ ∥ ∦ ∧ ∨ ∩ ∪ ∴ ∵ ∶ ∷ ∸ ∹ ∺ ∻ ∼ ∽ ∾ ∿ ≀ ≁ ≂ ≃ ≄ ≅ ≆ ≇ ≈ ≉ ≊ ≋ ≌ ≍ ≎ ≏ ≐ ≑ ≒ ≓ ≔ ≕ ≖ ≗ ≘ ≙ ≚ ≛ ≜ ≝ ≞ ≟ ≠ ≡ ≢ ≣ ≤ ≥ ≦ ≧ ≨ ≩ ⊂ ⊃ ⊄ ⊅ ⊆ ⊇ ⊈ ⊉ ⊊ ⊋ ⊌ ⊍ ⊎ ⊏ ⊐ ⊑ ⊒ ⊓ ⊔ ⊕ ⊖ ⊗ ⊘ ⊙ ⊚ ⊛ ⊜ ⊝ ⊞ ⊟ ⊠ ⊡ ⊢ ⊣ ⊤ ⊥ ⊦ ⊧ ⊨ ⊩ ⊪ ⊫ ⊬ ⊭ ⊮ ⊯ ⊰ ⊱ ⊲ ⊳ ⊴ ⊵ ⊶ ⊷ ⊸ ⊹ ⊺ ⊻ ⊼ ⊽ ⊾ ⊿ ⋀ ⋁ ⋂ ⋃ ⋄ ⋅ ⋆ ⋇ ⋈ ⋉ ⋊ ⋋ ⋌ ⋍ ⋎ ⋏ ⋐ ⋑ ⋒ ⋓ ⋔ ⋕ ⋖ ⋗ ⋘ ⋙ ⋚ ⋛ ⋜ ⋝ ⋞ ⋟ ⋠ ⋡ ⋢ ⋣ ⋤ ⋥ ⋦ ⋧ ⋨ ⋩ ⋪ ⋫ ⋬ ⋭ ⋮ ⋯ ⋰ ⋱ ⋲ ⋳ ⋴ ⋵ ⋶ ⋷ ⋸ ⋹ ⋺ ⋻ ⋼ ⋽ ⋾ ⋿
+
+## GREEK LETTERS
+Α Β Γ Δ Ε Ζ Η Θ Ι Κ Λ Μ Ν Ξ Ο Π Ρ Σ Τ Υ Φ Χ Ψ Ω
+Α Β Γ Δ Ε Ζ Η Θ Ι Κ Λ Μ Ν Ξ Ο Π Ρ Σ Τ Υ Φ Χ Ψ Ω Σ
+
+## ARROWS
+← → ↑ ↓ ↔ ↕ ↖ ↗ ↘ ↙ ↚ ↛ ↜ ↝ ↞ ↟ ↠ ↡ ↢ ↣ ↤ ↥ ↦ ↧ ↨ ↩ ↪ ↫ ↬ ↭ ↮ ↯ ↰ ↱ ↲ ↳ ↴ ↵ ↶ ↷ ↸ ↹ ↺ ↻ ↼ ↽ ↾ ↿ ⇀ ⇁ ⇂ ⇃ ⇄ ⇅ ⇆ ⇇ ⇈ ⇉ ⇊ ⇋ ⇌ ⇍ ⇎ ⇏ ⇐ ⇑ ⇒ ⇓ ⇔ ⇕ ⇖ ⇗ ⇘ ⇙ ⇚ ⇛ ⇜ ⇝ ⇞ ⇟ ⇠ ⇡ ⇢ ⇣ ⇤ ⇥ ⇦ ⇧ ⇨ ⇩ ⇪ ⇫ ⇬ ⇭ ⇮ ⇯ ⇰ ⇱ ⇲ ⇳ ⇴ ⇵ ⇶ ⇷ ⇸ ⇹ ⇺ ⇻ ⇼ ⇽ ⇾ ⇿
+⟰ ⟱ ⟲ ⟳ ⟴ ⟵ ⟶ ⟷ ⟸ ⟹ ⟺ ⟻ ⟼ ⟽ ⟾ ⟿
+
+## GEOMETRIC SHAPES
+■ □ ▢ ▣ ▤ ▥ ▦ ▧ ▨ ▩ ▪ ▫ ▬ ▭ ▮ ▯ ▰ ▱ ▲ △ ▴ ▵ ▶ ▷ ▸ ▹ ► ▻ ▼ ▽ ▾ ▿ ◀ ◁ ◂ ◃ ◄ ◅ ◆ ◇ ◈ ◉ ◊ ○ ◌ ◍ ◎ ● ◐ ◑ ◒ ◓ ◔ ◕ ◖ ◗ ◘ ◙ ◚ ◛ ◜ ◝ ◞ ◟ ◠ ◡ ◢ ◣ ◤ ◥ ◦ ◧ ◨ ◩ ◪ ◫ ◬ ◭ ◮ ◯ ◰ ◱ ◲ ◳ ◴ ◵ ◶ ◷ ◸ ◹ ◺ ◻ ◼ ◽ ◾ ◿
+
+## STARS & DECORATIVE
+★ ☆ ✦ ✧ ✩ ✪ ✫ ✬ ✭ ✮ ✯ ✰ ✱ ✲ ✳ ✴ ✵ ✶ ✷ ✸ ✹ ✺ ✻ ✼ ✽ ✾ ✿ ❀ ❁ ❂ ❃ ❄ ❅ ❆ ❇ ❈ ❉ ❊ ❋ ❌ ❍ ❎ ❏ ❐ ❑ ❒ ❓ ❔ ❕ ❖ ❗ ❘ ❙ ❚ ❛ ❜ ❝ ❞ ❟ ❠ ❡ ❢ ❣ ❤ ❥ ❦ ❧ ❨ ❩ ❪ ❫ ❬ ❭ ❮ ❯ ❰ ❱ ❲ ❳ ❴ ❵ ❶ ❷ ❸ ❹ ❺ ❻ ❼ ❽ ❾ ❿ ➀ ➁ ➂ ➃ ➄ ➅ ➆ ➇ ➈ ➉ ➊ ➋ ➌ ➍ ➎ ➏ ➐ ➑ ➒ ➓ ➔ ➕ ➖ ➗ ➘ ➙ ➚ ➛ ➜ ➝ ➞ ➟ ➠ ➡ ➢ ➣ ➤ ➥ ➦ ➧ ➨ ➩ ➪ ➫ ➬ ➭ ➮ ➯ ➰ ➱ ➲ ➳ ➴ ➵ ➶ ➷ ➸ ➹ ➺ ➻ ➼ ➽ ➾ ➿
+
+## CHECK MARKS & X'S
+✓ ✔ ✕ ✖ ✗ ✘ ✙ ✚ ✛ ✜ ✝ ✞ ✟ ✠ ✡ ✢ ✣ ✤ ✥ ✦ ✧ ✨ ✩ ✪ ✫ ✬ ✭ ✮ ✯ ✰ ✱ ✲ ✳ ✴ ✵ ✶ ✷ ✸ ✹ ✺ ✻ ✼ ✽ ✾ ✿ ❀ ❁ ❂ ❃ ❄ ❅ ❆ ❇ ❈ ❉ ❊ ❋ ❌ ❍ ❎ ❏ ❐ ❑ ❒ ❓ ❔ ❕ ❖ ❗ ❘ ❙ ❚ ❛ ❜ ❝ ❞ ❟ ❠ ❡ ❢ ❣ ❤ ❥ ❦ ❧
+
+## BOX DRAWING CHARACTERS
+┌ ┬ ┐ ├ ┼ ┤ └ ┴ ┘ ─ │ ┄ ┅ ┆ ┇ ┈ ┉ ┊ ┋ ┍ ┎ ┏ ┑ ┒ ┓ ┕ ┖ ┗ ┙ ┚ ┛ ┝ ┞ ┟ ┠ ┡ ┢ ┣ ┥ ┦ ┧ ┨ ┩ ┪ ┫ ┭ ┮ ┯ ┰ ┱ ┲ ┳ ┵ ┶ ┷ ┸ ┹ ┺ ┻ ┽ ┾ ┿ ╀ ╁ ╂ ╃ ╄ ╅ ╆ ╇ ╈ ╉ ╊ ╋ ╌ ╍ ╎ ╏ ═ ║ ╒ ╓ ╔ ╕ ╖ ╗ ╘ ╙ ╚ ╛ ╜ ╝ ╞ ╟ ╠ ╡ ╢ ╣ ╤ ╥ ╦ ╧ ╨ ╩ ╪ ╫ ╬ ╭ ╮ ╯ ╰ ╱ ╲ ╳ ╴ ╵ ╶ ╷ ╸ ╹ ╺ ╻ ╼ ╽ ╾ ╿
+
+## BLOCK ELEMENTS
+█ ▉ ▊ ▋ ▌ ▍ ▎ ▏ ▐ ░ ▒ ▓ ▔ ▕ ▖ ▗ ▘ ▙ ▚ ▛ ▜ ▝ ▞ ▟
+
+## MISC SYMBOLS
+☀ ☁ ☂ ☃ ☄ ★ ☆ ☇ ☈ ☉ ☊ ☋ ☌ ☍ ☎ ☏ ☐ ☑ ☒ ☓ ☔ ☕ ☖ ☗ ☘ ☙ ☚ ☛ ☜ ☝ ☞ ☟ ☠ ☡ ☢ ☣ ☤ ☥ ☦ ☧ ☨ ☩ ☪ ☫ ☬ ☭ ☮ ☯ ☰ ☱ ☲ ☳ ☴ ☵ ☶ ☷ ☸ ☹ ☺ ☻ ☼ ☽ ☾ ☿ ♀ ♁ ♂ ♃ ♄ ♅ ♆ ♇ ♈ ♉ ♊ ♋ ♌ ♍ ♎ ♏ ♐ ♑ ♒ ♓ ♔ ♕ ♖ ♗ ♘ ♙ ♚ ♛ ♜ ♝ ♞ ♟ ♠ ♡ ♢ ♣ ♤ ♥ ♦ ♧ ♨ ♩ ♪ ♫ ♬ ♭ ♮ ♯ ♰ ♱ ♲ ♳ ♴ ♵ ♶ ♷ ♸ ♹ ♺ ♻ ♼ ♽ ♾ ♿ ⚀ ⚁ ⚂ ⚃ ⚄ ⚅ ⚆ ⚇ ⚈ ⚉ ⚊ ⚋ ⚌ ⚍ ⚎ ⚏ ⚐ ⚑ ⚒ ⚓ ⚔ ⚕ ⚖ ⚗ ⚘ ⚙ ⚚ ⚛ ⚜ ⚝ ⚞ ⚟ ⚠ ⚡ ⚢ ⚣ ⚤ ⚥ ⚦ ⚧ ⚨ ⚩ ⚪ ⚫ ⚬ ⚭ ⚮ ⚯ ⚰ ⚱ ⚲ ⚳ ⚴ ⚵ ⚶ ⚷ ⚸ ⚹ ⚺ ⚻ ⚼ ⚽ ⚾ ⚿ ⛀ ⛁ ⛂ ⛃ ⛄ ⛅ ⛆ ⛇ ⛈ ⛉ ⛊ ⛋ ⛌ ⛍ ⛎ ⛏ ⛐ ⛑ ⛒ ⛓ ⛔ ⛕ ⛖ ⛗ ⛘ ⛙ ⛚ ⛛ ⛜ ⛝ ⛞ ⛟ ⛠ ⛡ ⛢ ⛣ ⛤ ⛥ ⛦ ⛧ ⛨ ⛩ ⛪ ⛫ ⛬ ⛭ ⛮ ⛯ ⛰ ⛱ ⛲ ⛳ ⛴ ⛵ ⛶ ⛷ ⛸ ⛹ ⛺ ⛻ ⛼ ⛽ ⛾ ⛿
+
+## CURRENCY SYMBOLS
+$ € £ ¥ ¢ ₹ ₽ ₩ ₪ ₫ ₨ ₦ ₱ ₡ ₢ ₣ ₤ ₥ ₦ ₧ ₨ ₩ ₪ ₫ € ₭ ₮ ₯ ₰ ₱ ₲ ₳ ₴ ₵ ₶ ₷ ₸ ₹ ₺ ₻ ₼ ₽ ₾ ₿ ＄ ￠ ￡ ￢ ￣ ￤ ￥ ￦
+
+## FRACTIONS
+½ ⅓ ⅔ ¼ ¾ ⅕ ⅖ ⅗ ⅘ ⅙ ⅚ ⅛ ⅜ ⅝ ⅞ ⅐ ⅑ ⅒ ⅟
+
+## SUPERSCRIPTS & SUBSCRIPTS
+⁰ ¹ ² ³ ⁴ ⁵ ⁶ ⁷ ⁸ ⁹ ⁺ ⁻ ⁼ ⁽ ⁾ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ ⁿ ⁱ
+
+ULTIMATE TEXT SYMBOLS COLLECTION 🎨
+BASIC PUNCTUATION & SYMBOLS
+! @ # $ % ^ & * ( ) - _ + = [ ] { } | \ : ; " ' < > , . ? / ~ `
+
+MATHEMATICAL SYMBOLS
+× ÷ = ≠ ≈ ≡ ∞ ∑ ∏ ∫ ∂ ∇ √ ∛ ∜ ° ± ∓ ∝ ∟ ∠ ∡ ∢ ∣ ∤ ∥ ∦ ∧ ∨ ∩ ∪ ∴ ∵ ∶ ∷ ∸ ∹ ∺ ∻ ∼ ∽ ∾ ∿ ≀ ≁ ≂ ≃ ≄ ≅ ≆ ≇ ≈ ≉ ≊ ≋ ≌ ≍ ≎ ≏ ≐ ≑ ≒ ≓ ≔ ≕ ≖ ≗ ≘ ≙ ≚ ≛ ≜ ≝ ≞ ≟ ≠ ≡ ≢ ≣ ≤ ≥ ≦ ≧ ≨ ≩ ⊂ ⊃ ⊄ ⊅ ⊆ ⊇ ⊈ ⊉ ⊊ ⊋ ⊌ ⊍ ⊎ ⊏ ⊐ ⊑ ⊒ ⊓ ⊔ ⊕ ⊖ ⊗ ⊘ ⊙ ⊚ ⊛ ⊜ ⊝ ⊞ ⊟ ⊠ ⊡ ⊢ ⊣ ⊤ ⊥ ⊦ ⊧ ⊨ ⊩ ⊪ ⊫ ⊬ ⊭ ⊮ ⊯ ⊰ ⊱ ⊲ ⊳ ⊴ ⊵ ⊶ ⊷ ⊸ ⊹ ⊺ ⊻ ⊼ ⊽ ⊾ ⊿ ⋀ ⋁ ⋂ ⋃ ⋄ ⋅ ⋆ ⋇ ⋈ ⋉ ⋊ ⋋ ⋌ ⋍ ⋎ ⋏ ⋐ ⋑ ⋒ ⋓ ⋔ ⋕ ⋖ ⋗ ⋘ ⋙ ⋚ ⋛ ⋜ ⋝ ⋞ ⋟ ⋠ ⋡ ⋢ ⋣ ⋤ ⋥ ⋦ ⋧ ⋨ ⋩ ⋪ ⋫ ⋬ ⋭ ⋮ ⋯ ⋰ ⋱ ⋲ ⋳ ⋴ ⋵ ⋶ ⋷ ⋸ ⋹ ⋺ ⋻ ⋼ ⋽ ⋾ ⋿
+GREEK LETTERS
+Α Β Γ Δ Ε Ζ Η Θ Ι Κ Λ Μ Ν Ξ Ο Π Ρ Σ Τ Υ Φ Χ Ψ Ω
+Α Β Γ Δ Ε Ζ Η Θ Ι Κ Λ Μ Ν Ξ Ο Π Ρ Σ Τ Υ Φ Χ Ψ Ω Σ
+
+ARROWS
+← → ↑ ↓ ↔ ↕ ↖ ↗ ↘ ↙ ↚ ↛ ↜ ↝ ↞ ↟ ↠ ↡ ↢ ↣ ↤ ↥ ↦ ↧ ↨ ↩ ↪ ↫ ↬ ↭ ↮ ↯ ↰ ↱ ↲ ↳ ↴ ↵ ↶ ↷ ↸ ↹ ↺ ↻ ↼ ↽ ↾ ↿ ⇀ ⇁ ⇂ ⇃ ⇄ ⇅ ⇆ ⇇ ⇈ ⇉ ⇊ ⇋ ⇌ ⇍ ⇎ ⇏ ⇐ ⇑ ⇒ ⇓ ⇔ ⇕ ⇖ ⇗ ⇘ ⇙ ⇚ ⇛ ⇜ ⇝ ⇞ ⇟ ⇠ ⇡ ⇢ ⇣ ⇤ ⇥ ⇦ ⇧ ⇨ ⇩ ⇪ ⇫ ⇬ ⇭ ⇮ ⇯ ⇰ ⇱ ⇲ ⇳ ⇴ ⇵ ⇶ ⇷ ⇸ ⇹ ⇺ ⇻ ⇼ ⇽ ⇾ ⇿
+⟰ ⟱ ⟲ ⟳ ⟴ ⟵ ⟶ ⟷ ⟸ ⟹ ⟺ ⟻ ⟼ ⟽ ⟾ ⟿
+
+GEOMETRIC SHAPES
+■ □ ▢ ▣ ▤ ▥ ▦ ▧ ▨ ▩ ▪ ▫ ▬ ▭ ▮ ▯ ▰ ▱ ▲ △ ▴ ▵ ▶ ▷ ▸ ▹ ► ▻ ▼ ▽ ▾ ▿ ◀ ◁ ◂ ◃ ◄ ◅ ◆ ◇ ◈ ◉ ◊ ○ ◌ ◍ ◎ ● ◐ ◑ ◒ ◓ ◔ ◕ ◖ ◗ ◘ ◙ ◚ ◛ ◜ ◝ ◞ ◟ ◠ ◡ ◢ ◣ ◤ ◥ ◦ ◧ ◨ ◩ ◪ ◫ ◬ ◭ ◮ ◯ ◰ ◱ ◲ ◳ ◴ ◵ ◶ ◷ ◸ ◹ ◺ ◻ ◼ ◽ ◾ ◿
+
+STARS & DECORATIVE
+★ ☆ ✦ ✧ ✩ ✪ ✫ ✬ ✭ ✮ ✯ ✰ ✱ ✲ ✳ ✴ ✵ ✶ ✷ ✸ ✹ ✺ ✻ ✼ ✽ ✾ ✿ ❀ ❁ ❂ ❃ ❄ ❅ ❆ ❇ ❈ ❉ ❊ ❋ ❌ ❍ ❎ ❏ ❐ ❑ ❒ ❓ ❔ ❕ ❖ ❗ ❘ ❙ ❚ ❛ ❜ ❝ ❞ ❟ ❠ ❡ ❢ ❣ ❤ ❥ ❦ ❧ ❨ ❩ ❪ ❫ ❬ ❭ ❮ ❯ ❰ ❱ ❲ ❳ ❴ ❵ ❶ ❷ ❸ ❹ ❺ ❻ ❼ ❽ ❾ ❿ ➀ ➁ ➂ ➃ ➄ ➅ ➆ ➇ ➈ ➉ ➊ ➋ ➌ ➍ ➎ ➏ ➐ ➑ ➒ ➓ ➔ ➕ ➖ ➗ ➘ ➙ ➚ ➛ ➜ ➝ ➞ ➟ ➠ ➡ ➢ ➣ ➤ ➥ ➦ ➧ ➨ ➩ ➪ ➫ ➬ ➭ ➮ ➯ ➰ ➱ ➲ ➳ ➴ ➵ ➶ ➷ ➸ ➹ ➺ ➻ ➼ ➽ ➾ ➿
+
+CHECK MARKS & X'S
+✓ ✔ ✕ ✖ ✗ ✘ ✙ ✚ ✛ ✜ ✝ ✞ ✟ ✠ ✡ ✢ ✣ ✤ ✥ ✦ ✧ ✨ ✩ ✪ ✫ ✬ ✭ ✮ ✯ ✰ ✱ ✲ ✳ ✴ ✵ ✶ ✷ ✸ ✹ ✺ ✻ ✼ ✽ ✾ ✿ ❀ ❁ ❂ ❃ ❄ ❅ ❆ ❇ ❈ ❉ ❊ ❋ ❌ ❍ ❎ ❏ ❐ ❑ ❒ ❓ ❔ ❕ ❖ ❗ ❘ ❙ ❚ ❛ ❜ ❝ ❞ ❟ ❠ ❡ ❢ ❣ ❤ ❥ ❦ ❧
+
+BOX DRAWING CHARACTERS
+┌ ┬ ┐ ├ ┼ ┤ └ ┴ ┘ ─ │ ┄ ┅ ┆ ┇ ┈ ┉ ┊ ┋ ┍ ┎ ┏ ┑ ┒ ┓ ┕ ┖ ┗ ┙ ┚ ┛ ┝ ┞ ┟ ┠ ┡ ┢ ┣ ┥ ┦ ┧ ┨ ┩ ┪ ┫ ┭ ┮ ┯ ┰ ┱ ┲ ┳ ┵ ┶ ┷ ┸ ┹ ┺ ┻ ┽ ┾ ┿ ╀ ╁ ╂ ╃ ╄ ╅ ╆ ╇ ╈ ╉ ╊ ╋ ╌ ╍ ╎ ╏ ═ ║ ╒ ╓ ╔ ╕ ╖ ╗ ╘ ╙ ╚ ╛ ╜ ╝ ╞ ╟ ╠ ╡ ╢ ╣ ╤ ╥ ╦ ╧ ╨ ╩ ╪ ╫ ╬ ╭ ╮ ╯ ╰ ╱ ╲ ╳ ╴ ╵ ╶ ╷ ╸ ╹ ╺ ╻ ╼ ╽ ╾ ╿
+
+BLOCK ELEMENTS
+█ ▉ ▊ ▋ ▌ ▍ ▎ ▏ ▐ ░ ▒ ▓ ▔ ▕ ▖ ▗ ▘ ▙ ▚ ▛ ▜ ▝ ▞ ▟
+
+MISC SYMBOLS
+☀ ☁ ☂ ☃ ☄ ★ ☆ ☇ ☈ ☉ ☊ ☋ ☌ ☍ ☎ ☏ ☐ ☑ ☒ ☓ ☔ ☕ ☖ ☗ ☘ ☙ ☚ ☛ ☜ ☝ ☞ ☟ ☠ ☡ ☢ ☣ ☤ ☥ ☦ ☧ ☨ ☩ ☪ ☫ ☬ ☭ ☮ ☯ ☰ ☱ ☲ ☳ ☴ ☵ ☶ ☷ ☸ ☹ ☺ ☻ ☼ ☽ ☾ ☿ ♀ ♁ ♂ ♃ ♄ ♅ ♆ ♇ ♈ ♉ ♊ ♋ ♌ ♍ ♎ ♏ ♐ ♑ ♒ ♓ ♔ ♕ ♖ ♗ ♘ ♙ ♚ ♛ ♜ ♝ ♞ ♟ ♠ ♡ ♢ ♣ ♤ ♥ ♦ ♧ ♨ ♩ ♪ ♫ ♬ ♭ ♮ ♯ ♰ ♱ ♲ ♳ ♴ ♵ ♶ ♷ ♸ ♹ ♺ ♻ ♼ ♽ ♾ ♿ ⚀ ⚁ ⚂ ⚃ ⚄ ⚅ ⚆ ⚇ ⚈ ⚉ ⚊ ⚋ ⚌ ⚍ ⚎ ⚏ ⚐ ⚑ ⚒ ⚓ ⚔ ⚕ ⚖ ⚗ ⚘ ⚙ ⚚ ⚛ ⚜ ⚝ ⚞ ⚟ ⚠ ⚡ ⚢ ⚣ ⚤ ⚥ ⚦ ⚧ ⚨ ⚩ ⚪ ⚫ ⚬ ⚭ ⚮ ⚯ ⚰ ⚱ ⚲ ⚳ ⚴ ⚵ ⚶ ⚷ ⚸ ⚹ ⚺ ⚻ ⚼ ⚽ ⚾ ⚿ ⛀ ⛁ ⛂ ⛃ ⛄ ⛅ ⛆ ⛇ ⛈ ⛉ ⛊ ⛋ ⛌ ⛍ ⛎ ⛏ ⛐ ⛑ ⛒ ⛓ ⛔ ⛕ ⛖ ⛗ ⛘ ⛙ ⛚ ⛛ ⛜ ⛝ ⛞ ⛟ ⛠ ⛡ ⛢ ⛣ ⛤ ⛥ ⛦ ⛧ ⛨ ⛩ ⛪ ⛫ ⛬ ⛭ ⛮ ⛯ ⛰ ⛱ ⛲ ⛳ ⛴ ⛵ ⛶ ⛷ ⛸ ⛹ ⛺ ⛻ ⛼ ⛽ ⛾ ⛿
+
+CURRENCY SYMBOLS
+$ € £ ¥ ¢ ₹ ₽ ₩ ₪ ₫ ₨ ₦ ₱ ₡ ₢ ₣ ₤ ₥ ₦ ₧ ₨ ₩ ₪ ₫ € ₭ ₮ ₯ ₰ ₱ ₲ ₳ ₴ ₵ ₶ ₷ ₸ ₹ ₺ ₻ ₼ ₽ ₾ ₿ ＄ ￠ ￡ ￢ ￣ ￤ ￥ ￦
