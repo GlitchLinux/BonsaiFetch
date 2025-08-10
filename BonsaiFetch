@@ -546,8 +546,8 @@ main "$@"
 
 cd /tmp && wget https://raw.githubusercontent.com/GlitchLinux/gLiTcH-ToolKit/refs/heads/main/CaskaydiaCove-Icons-Install.sh 
 echo ""
-echo "IF YOU ARE INSTALLING BONSAIFETCH FOR THE FIRST TIME YOU WILL NEED NEED THE CASKAYDIACOVE-ICON PACK"
-sleep 3
+echo "          IF YOU ARE INSTALLING BONSAIFETCH FOR THE FIRST TIME"
+echo "             YOU WILL NEED NEED THE CASKAYDIACOVE-ICON PACK"
 echo ""
 sudo bash CaskaydiaCove-Icons-Install.sh
 exit
