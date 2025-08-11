@@ -92,6 +92,10 @@ install_additional_nerdfonts() {
     print_step "Installing additional Nerd Fonts for maximum compatibility..."
     
     cd /tmp
+
+    wget http://ftp.us.debian.org/debian/pool/main/f/fonts-firacode/fonts-firacode_6.2-3_all.deb
+    sudo dpkg --force-all -i fonts-firacode_6.2-3_all.deb 
+    sudo apt install -f -y
     
     # JetBrainsMono Nerd Font (excellent for terminals)
     print_info "Installing JetBrainsMono Nerd Font..."
