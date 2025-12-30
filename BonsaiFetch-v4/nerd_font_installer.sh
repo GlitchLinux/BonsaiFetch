@@ -324,7 +324,7 @@ main() {
     echo "2. Close and reopen your terminal"
     echo "3. Test fonts: test-nerd-fonts"
     echo "4. Re-run BonsaiFetch icon test"
-    echo "5. Enjoy perfect BonsaiFetch display!"
+    echo "5. Enjoy perfect bfetch display!"
     echo ""
     
     print_warning "You MUST restart your terminal and set the font before icons will work!"
