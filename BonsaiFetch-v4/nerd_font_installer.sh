@@ -297,7 +297,7 @@ main() {
     fi
     
     echo ""
-    print_info "🚀 Starting comprehensive font installation..."
+    print_info "Starting comprehensive font installation..."
     echo ""
     
     # Installation steps
