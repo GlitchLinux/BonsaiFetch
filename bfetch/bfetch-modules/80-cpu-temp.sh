@@ -11,3 +11,5 @@ module_cpu_temp() {
         [ -n "$temp" ] && echo "  ${temp}°C"
     fi
 }
+
+module_cpu_temp
