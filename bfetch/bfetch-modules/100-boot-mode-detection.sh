@@ -12,10 +12,10 @@ detect_boot_type() {
         
         # Specific live system type detection
         if grep -q "toram" /proc/cmdline 2>/dev/null; then
-            echo "   Ram Boot"
+            echo "  Ram Boot"
             return
         elif grep -q "persistent" /proc/cmdline 2>/dev/null; then
-            echo "   Persistent"
+            echo "  Persistent"
             return
         fi
     fi
@@ -49,7 +49,7 @@ detect_boot_type() {
         
         # Check if media is read-only ISO
         if mount | grep -q "/run/live/medium.*ro.*iso9660" 2>/dev/null; then
-            echo "Iso Boot"
+            echo "  Iso Boot"
             return
         fi
     fi
@@ -57,7 +57,7 @@ detect_boot_type() {
     # Method 6: LUKS encryption detection
     if [[ -d /dev/mapper ]] && ls /dev/mapper/luks-* >/dev/null 2>&1; then
         if findmnt /union >/dev/null 2>&1 || [[ $live_score -gt 0 ]]; then
-            echo "   Persistent Luks"
+            echo "  Persistent Luks"
             return
         fi
     fi
@@ -104,19 +104,19 @@ detect_boot_type() {
     # Final determination with confidence scoring
     if [[ $live_score -ge 6 ]]; then
         if ! findmnt /run/live/medium >/dev/null 2>&1 && [[ $live_score -ge 8 ]]; then
-            echo " 󰓡 Ram Boot"
+            echo "󰓡  Ram Boot"
         else
-            echo "   Live System"
+            echo "  Live System"
         fi
     elif [[ $live_score -ge 3 ]]; then
-        echo "   Live Boot"
+        echo "  Live Boot"
     elif [[ $install_score -ge 4 ]]; then
-        echo "   Persistent"
+        echo "  Persistent"
     else
         if [[ -f /etc/fstab ]] && grep -q "UUID=" /etc/fstab 2>/dev/null; then
-            echo "   Persistent"
+            echo "  Persistent"
         else
-            echo "   Live Boot"
+            echo "  Live Boot"
         fi
     fi
 }
