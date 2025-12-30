@@ -181,7 +181,7 @@ show_terminal_config() {
     
     print_info "To ensure all icons display properly:"
     echo ""
-    echo "1. 🎯 SET TERMINAL FONT:"
+    echo "1. SET TERMINAL FONT:"
     echo "   In your terminal preferences, set font to one of:"
     echo "   • CaskaydiaCove Nerd Font (recommended for BonsaiFetch)"
     echo "   • JetBrainsMono Nerd Font"
@@ -189,13 +189,13 @@ show_terminal_config() {
     echo "   • Hack Nerd Font"
     echo ""
     
-    echo "2. 📐 TERMINAL SETTINGS:"
+    echo "2.  TERMINAL SETTINGS:"
     echo "   • Font size: 11-14pt recommended"
     echo "   • Enable: Allow bold text"
     echo "   • Ensure: UTF-8 encoding"
     echo ""
     
-    echo "3. 🔧 FOR SPECIFIC TERMINALS:"
+    echo "3.  FOR SPECIFIC TERMINALS:"
     echo ""
     echo "   GNOME Terminal:"
     echo "   gnome-terminal → Preferences → Profiles → Edit → Text"
@@ -235,30 +235,30 @@ echo "║                  Nerd Font Icon Test                      ║"
 echo "╚════════════════════════════════════════════════════════════╝"
 echo ""
 
-echo "🎯 BonsaiFetch Essential Icons:"
+echo "BonsaiFetch Essential Icons:"
 echo "󰇅 󰅐 󰍛 󰋊 󰩟 󰏖 󰓡 - hostname, uptime, GPU, disk, network, packages, RAM"
 echo ""
 
-echo "🖥️  System Icons:"
+echo "System Icons:"
 echo "     - OS, kernel, CPU, shell, terminal"
 echo ""
 
-echo "🔧 Additional Icons:"
+echo " Additional Icons:"
 echo "          - load, processes, sensors, battery, display"
 echo ""
 
-echo "✨ Decorative:"
+echo " Decorative:"
 echo "← → ↑ ↓ ✓ ✗ ★ ☆ ♦ ♠ ♣ ♥ ○ ● ◆ ◇ ▪ ▫ ■ □"
 echo ""
 
-echo "📊 Box Drawing:"
+echo " Box Drawing:"
 echo "╭─╮ ├─┤ ╰─╯ ┌─┐ └─┘ ╔═╗ ╚═╝"
 echo ""
 
 if fc-list | grep -qi "nerd\|cascadia"; then
-    echo "✅ Nerd Font detected - icons should display properly"
+    echo "Nerd Font detected - icons should display properly"
 else
-    echo "❌ No Nerd Font detected - please install fonts"
+    echo " No Nerd Font detected - please install fonts"
 fi
 
 echo ""
@@ -278,7 +278,7 @@ main() {
     
     check_root
     
-    echo -e "${YELLOW}🎨 This script will install comprehensive Nerd Font support for BonsaiFetch${NC}"
+    echo -e "${YELLOW}This script will install comprehensive Nerd Font support for BonsaiFetch${NC}"
     echo ""
     echo "What will be installed:"
     echo "• CaskaydiaCove Nerd Font (primary)"
@@ -311,7 +311,7 @@ main() {
     
     # Show results
     echo ""
-    print_status "🎉 Font installation completed successfully!"
+    print_status "Font installation completed successfully!"
     echo ""
     
     test_fonts
@@ -327,7 +327,7 @@ main() {
     echo "5. Enjoy perfect BonsaiFetch display!"
     echo ""
     
-    print_warning "⚠️  You MUST restart your terminal and set the font before icons will work!"
+    print_warning "You MUST restart your terminal and set the font before icons will work!"
     echo ""
 }
 
