@@ -1,0 +1,5 @@
+#!/bin/bash
+
+sudo nano /usr/local/bin/bfetch
+clear
+bfetch
