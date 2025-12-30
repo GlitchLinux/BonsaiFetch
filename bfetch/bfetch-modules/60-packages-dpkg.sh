@@ -4,7 +4,7 @@
 module_packages_dpkg() {
     if command -v dpkg &>/dev/null; then
         local count=$(dpkg -l | grep "^ii" | wc -l)
-        echo "󰏖  ${count} [dpkg]"
+        echo "󰏖  ${count} dpkg"
     fi
 }
 
