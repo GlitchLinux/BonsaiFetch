@@ -13,5 +13,5 @@ sudo chmod 777 /usr/local/bin/bfetch
 sudo chmod +x /usr/local/bin/bfetch-modules/*
 cd && sudo rm -r /tmp/BonsaiFetch
 clear
-echo "bfetch was uccesfully updated!" | borderize -505050
+echo "bfetch was succesfully updated!" | borderize -505050
 bfetch
