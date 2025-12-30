@@ -4,11 +4,11 @@
 module_firewall() {
     if systemctl is-active ufw &>/dev/null; then
         local status=$(ufw status | grep "Status:" | awk '{print $2}')
-        echo "󰒃 UFW: ${status}"
+        echo "󰒃  UFW: ${status}"
     elif systemctl is-active firewalld &>/dev/null; then
-        echo "󰒃 firewalld: active"
+        echo "󰒃  firewalld: active"
     elif systemctl is-active iptables &>/dev/null; then
-        echo "󰒃 iptables: active"
+        echo "󰒃  iptables: active"
     fi
 }
 
