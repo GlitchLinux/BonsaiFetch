@@ -8,7 +8,7 @@ module_cpu_temp() {
         echo "󰔏  CPU:${celsius}°C"
     elif command -v sensors &>/dev/null; then
         local temp=$(sensors | grep -i "core 0" | awk '{print $3}' | tr -d '+°C' | cut -d. -f1)
-        [ -n "$temp" ] && echo "󰔏°° ${temp}°C"
+        [ -n "$temp" ] && echo "󰔏° ${temp}°C"
     fi
 }
 
