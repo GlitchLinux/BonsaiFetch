@@ -1,5 +1,5 @@
 #!/bin/bash
 
 cd /usr/local/bin/bfetch-modules/ && sudo bash bfetch.cfg > /tmp/bfetch
-cat /tmp/bfetch | borderize
+cat /tmp/bfetch | borderize -505050
 rm /tmp/bfetch
