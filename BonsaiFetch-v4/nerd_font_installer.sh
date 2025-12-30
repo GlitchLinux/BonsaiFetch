@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Complete Nerd Font Installation Script for BonsaiFetch
+# Complete Nerd Font Installation Script for betch
 # Installs all necessary fonts and dependencies for perfect icon display
 # Compatible with Ubuntu/Debian systems
 
@@ -278,7 +278,7 @@ main() {
     
     check_root
     
-    echo -e "${YELLOW}This script will install comprehensive Nerd Font support for BonsaiFetch${NC}"
+    echo -e "${YELLOW}This script will install comprehensive Nerd Font support for betch${NC}"
     echo ""
     echo "What will be installed:"
     echo "• CaskaydiaCove Nerd Font (primary)"
@@ -318,7 +318,7 @@ main() {
     show_terminal_config
     
     echo ""
-    print_info "🔄 NEXT STEPS:"
+    print_info " NEXT STEPS:"
     echo ""
     echo "1. Configure your terminal font (see recommendations above)"
     echo "2. Close and reopen your terminal"
