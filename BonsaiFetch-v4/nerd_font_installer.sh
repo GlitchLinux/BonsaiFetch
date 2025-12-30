@@ -60,8 +60,7 @@ install_font_dependencies() {
         fonts-noto \
         fonts-noto-color-emoji \
         fonts-dejavu \
-        fonts-liberation \
-        ttf-mscorefonts-installer
+        fonts-liberation 
     
     print_status "Font dependencies installed"
 }
