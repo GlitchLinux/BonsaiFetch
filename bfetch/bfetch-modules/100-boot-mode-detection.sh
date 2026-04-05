@@ -1,10 +1,10 @@
+
 #!/bin/bash
 
 # Advanced boot detection function with multiple failsafe methods
 detect_boot_type() {
     local live_score=0
     local install_score=0
-    local detection_methods=()
     
     # Method 1: Kernel command line analysis (most reliable)
     if grep -qE "boot=live|boot=casper|rd.live.image|live:" /proc/cmdline 2>/dev/null; then
@@ -15,7 +15,7 @@ detect_boot_type() {
             echo "  Ram Boot"
             return
         elif grep -q "persistent" /proc/cmdline 2>/dev/null; then
-            echo "  Persistent"
+            echo "  Persistent"
             return
         fi
     fi
@@ -29,8 +29,11 @@ detect_boot_type() {
         fi
     done
     
-    # Method 3: SquashFS detection (primary live indicator)
-    if mount | grep -q squashfs 2>/dev/null; then
+    # Method 3: SquashFS detection - ONLY count if mounted as root or root-related overlay
+    # Ignore squashfs loop mounts (iPXE images, snaps, etc.)
+    if mount | grep -q 'squashfs.* on / ' 2>/dev/null || \
+       mount | grep -q 'squashfs.* on /run/live' 2>/dev/null || \
+       mount | grep -q 'squashfs.* on /rofs' 2>/dev/null; then
         ((live_score += 3))
     fi
     
@@ -66,8 +69,8 @@ detect_boot_type() {
     if [[ -d /sys/firmware/efi ]]; then
         local esp_size
         esp_size=$(lsblk -o SIZE,PARTTYPE 2>/dev/null | grep -i efi | head -1 | awk '{print $1}' | sed 's/[^0-9.]//g')
-        if [[ -n "$esp_size" ]] && command -v bc >/dev/null 2>&1; then
-            if (( $(echo "$esp_size < 500" | bc -l 2>/dev/null || echo "0") )); then
+        if [[ -n "$esp_size" ]] && [[ "$esp_size" =~ ^[0-9]+$ ]]; then
+            if (( esp_size < 500 )); then
                 ((install_score += 2))
             fi
         fi
@@ -80,15 +83,12 @@ detect_boot_type() {
         ((live_score += 1))
     fi
     
-    # Method 9: RAM vs filesystem size analysis
-    local total_ram root_size
-    total_ram=$(free -m 2>/dev/null | awk '/^Mem:/{print $2}' || echo "0")
-    root_size=$(df -m / 2>/dev/null | awk 'NR==2{print $3}' || echo "0")
-    
-    if [[ $root_size -gt 0 && $total_ram -gt 0 ]]; then
-        local ratio=$((root_size * 100 / total_ram))
-        if [[ $ratio -gt 40 ]]; then
-            ((live_score += 2))
+    # Method 9: fstab analysis (persistent installs have real fstab entries)
+    if [[ -f /etc/fstab ]]; then
+        local fstab_real_mounts
+        fstab_real_mounts=$(grep -cE '^UUID=|^/dev/' /etc/fstab 2>/dev/null; true)
+        if [[ $fstab_real_mounts -ge 1 ]]; then
+            ((install_score += 2))
         fi
     fi
     
@@ -101,20 +101,22 @@ detect_boot_type() {
         fi
     done
     
-    # Final determination with confidence scoring
-    if [[ $live_score -ge 6 ]]; then
+    # Final determination - persistent install score takes priority when root is a real filesystem
+    if [[ $install_score -ge 4 && $live_score -lt 6 ]]; then
+        echo "  Persistent"
+    elif [[ $live_score -ge 6 ]]; then
         if ! findmnt /run/live/medium >/dev/null 2>&1 && [[ $live_score -ge 8 ]]; then
             echo "󰓡  Ram Boot"
         else
-            echo "  Live System"
+            echo "  Live Boot"
         fi
     elif [[ $live_score -ge 3 ]]; then
         echo "  Live Boot"
-    elif [[ $install_score -ge 4 ]]; then
-        echo "  Persistent"
+    elif [[ $install_score -ge 2 ]]; then
+        echo "  Persistent"
     else
         if [[ -f /etc/fstab ]] && grep -q "UUID=" /etc/fstab 2>/dev/null; then
-            echo "  Persistent"
+            echo "  Persistent"
         else
             echo "  Live Boot"
         fi
